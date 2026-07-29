@@ -1,57 +1,383 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* -------------------- */
+/* YOVIK */
+/* -------------------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    min-height: 100vh;
-    background: linear-gradient(135deg, #8b0000 0%, #000000 50%, #006400 100%);
+html{
+    scroll-behavior:smooth;
 }
 
-.hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 30px;
+body{
+
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    color:white;
+    background:#090909;
+
 }
 
-.hero h1 {
-    font-size: 6rem;
-    font-weight: 900;
-    letter-spacing: 10px;
-    margin-bottom: 15px;
+/* -------------------- */
+/* HERO */
+/* -------------------- */
+
+.hero{
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    padding:40px;
+
+    background:linear-gradient(
+        135deg,
+        #b60000 0%,
+        #470000 25%,
+        #0a0a0a 50%,
+        #003b20 75%,
+        #00b35a 100%
+    );
+
+    background-size:250% 250%;
+
+    animation:gradientMove 20s ease infinite;
+
 }
 
-.tagline {
-    font-size: 1.6rem;
-    opacity: .9;
-    margin-bottom: 25px;
+@keyframes gradientMove{
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
 }
 
-.description {
-    max-width: 700px;
-    font-size: 1.2rem;
-    line-height: 1.8;
-    margin-bottom: 40px;
+.hero-content{
+
+    max-width:850px;
+
 }
 
-.button {
-    background: white;
-    color: black;
-    text-decoration: none;
-    padding: 18px 40px;
-    border-radius: 50px;
-    font-weight: bold;
-    font-size: 1.1rem;
-    transition: .3s;
+.hero h1{
+
+    font-size:1.3rem;
+
+    letter-spacing:10px;
+
+    margin-bottom:30px;
+
+    opacity:.9;
+
 }
 
-.button:hover {
-    transform: scale(1.05);
+.hero h2{
+
+    font-size:clamp(3.5rem,9vw,6.5rem);
+
+    line-height:1;
+
+    font-weight:800;
+
+    margin-bottom:35px;
+
+}
+
+.hero p{
+
+    font-size:1.25rem;
+
+    color:#d8d8d8;
+
+    line-height:1.7;
+
+    margin-bottom:25px;
+
+}
+
+.hero h3{
+
+    font-size:1.8rem;
+
+    margin-bottom:50px;
+
+    font-weight:600;
+
+}
+
+/* -------------------- */
+/* BUTTONS */
+/* -------------------- */
+
+.btn{
+
+    display:inline-block;
+
+    padding:18px 40px;
+
+    border-radius:999px;
+
+    background:linear-gradient(
+        90deg,
+        #c00000,
+        #0dbb63
+    );
+
+    color:white;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    font-size:1rem;
+
+    transition:.35s;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+
+}
+
+.btn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.45),
+        0 0 30px rgba(20,255,120,.35);
+
+}
+
+.learn-more{
+
+    display:block;
+
+    margin-top:30px;
+
+    color:#ddd;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.learn-more:hover{
+
+    color:white;
+
+}
+
+/* -------------------- */
+/* SECTIONS */
+/* -------------------- */
+
+section{
+
+    padding:120px 40px;
+
+}
+
+section h2{
+
+    text-align:center;
+
+    font-size:2.8rem;
+
+    margin-bottom:70px;
+
+}
+
+/* -------------------- */
+/* CARDS */
+/* -------------------- */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:30px;
+
+    max-width:1200px;
+
+    margin:auto;
+
+}
+
+.card{
+
+    background:#121212;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:20px;
+
+    padding:50px 30px;
+
+    text-align:center;
+
+    transition:.35s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#18c964;
+
+}
+
+.card h3{
+
+    font-size:1.3rem;
+
+}
+
+/* -------------------- */
+/* PRICING */
+/* -------------------- */
+
+#pricing{
+
+    text-align:center;
+
+}
+
+#pricing h2{
+
+    font-size:5rem;
+
+}
+
+#pricing span{
+
+    font-size:2rem;
+
+    color:#999;
+
+}
+
+#pricing ul{
+
+    list-style:none;
+
+    margin:40px 0;
+
+}
+
+#pricing li{
+
+    margin:15px 0;
+
+    font-size:1.2rem;
+
+}
+
+/* -------------------- */
+/* FAQ */
+/* -------------------- */
+
+#faq{
+
+    max-width:850px;
+
+    margin:auto;
+
+}
+
+details{
+
+    background:#121212;
+
+    margin-bottom:20px;
+
+    border-radius:16px;
+
+    padding:25px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+summary{
+
+    cursor:pointer;
+
+    font-size:1.15rem;
+
+    font-weight:600;
+
+}
+
+details p{
+
+    margin-top:20px;
+
+    color:#cfcfcf;
+
+    line-height:1.6;
+
+}
+
+/* -------------------- */
+/* FOOTER */
+/* -------------------- */
+
+footer{
+
+    text-align:center;
+
+    padding:50px;
+
+    color:#888;
+
+}
+
+/* -------------------- */
+/* MOBILE */
+/* -------------------- */
+
+@media(max-width:768px){
+
+.hero h2{
+
+    font-size:3rem;
+
+}
+
+.hero h3{
+
+    font-size:1.4rem;
+
+}
+
+section{
+
+    padding:90px 25px;
+
+}
+
+#pricing h2{
+
+    font-size:3.5rem;
+
+}
+
 }
