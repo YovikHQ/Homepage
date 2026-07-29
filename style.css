@@ -1,6 +1,6 @@
 /* ==========================================
-   YOVIK V3
-   PART 1 - FOUNDATION + HERO
+   YOVIK V4
+   PART 1 — FOUNDATION + HERO
 ========================================== */
 
 :root{
@@ -9,15 +9,10 @@
     --surface:#0b0b0b;
 
     --white:#ffffff;
-    --text:#d6d6d6;
+    --text:#d8d8d8;
 
-    --red-dark:#390000;
-    --red:#8f0000;
-    --red-bright:#d30000;
-
-    --green-dark:#0c4e2a;
-    --green:#13984f;
-    --green-bright:#2cff79;
+    --red:#b10000;
+    --green:#29ff7a;
 
 }
 
@@ -46,14 +41,22 @@ body{
 }
 
 /* ===========================
-   HERO
+GLOBAL SECTIONS
+=========================== */
+
+section{
+
+    padding:70px 40px;
+
+}
+
+/* ===========================
+HERO
 =========================== */
 
 .hero{
 
-    position:relative;
-
-    min-height:100vh;
+    min-height:78vh;
 
     display:flex;
 
@@ -61,13 +64,27 @@ body{
 
     align-items:center;
 
+    position:relative;
+
     overflow:hidden;
 
     isolation:isolate;
 
+    background:
+
+    linear-gradient(
+        180deg,
+        #b30000 0%,
+        #680000 18%,
+        #250000 38%,
+        #090909 58%,
+        #0c2d19 78%,
+        #0d6a39 100%
+    );
+
 }
 
-/* Red Glow */
+/* RED LIGHT */
 
 .hero::before{
 
@@ -79,19 +96,17 @@ body{
 
     background:
 
-    radial-gradient(
-        circle at 50% -10%,
-        rgba(211,0,0,.95),
-        rgba(90,0,0,.65) 35%,
-        rgba(10,10,10,.2) 65%,
-        transparent 90%
-    );
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(255,0,0,.55),
+            transparent 65%
+        );
 
-    z-index:-3;
+    z-index:-2;
 
 }
 
-/* Green Glow */
+/* GREEN LIGHT */
 
 .hero::after{
 
@@ -103,32 +118,13 @@ body{
 
     background:
 
-    radial-gradient(
-        circle at 50% 110%,
-        rgba(44,255,121,.45),
-        rgba(15,120,60,.35) 35%,
-        transparent 70%
-    );
+        radial-gradient(
+            circle at 50% 115%,
+            rgba(41,255,122,.28),
+            transparent 60%
+        );
 
-    z-index:-2;
-
-}
-
-/* Dark Overlay */
-
-.hero{
-
-    background:
-
-    linear-gradient(
-        180deg,
-        #b30000 0%,
-        #680000 18%,
-        #250000 38%,
-        #090909 56%,
-        #0d2416 72%,
-        #0d6a39 100%
-    );
+    z-index:-1;
 
 }
 
@@ -136,9 +132,7 @@ body{
 
     width:100%;
 
-    max-width:1200px;
-
-    padding:40px;
+    max-width:1180px;
 
     display:flex;
 
@@ -148,6 +142,8 @@ body{
 
     text-align:center;
 
+    padding:30px;
+
 }
 
 /* ===========================
@@ -156,13 +152,13 @@ LOGO
 
 .brand{
 
-    letter-spacing:18px;
+    font-size:1.45rem;
 
-    font-size:1.6rem;
+    font-weight:900;
 
-    font-weight:800;
+    letter-spacing:16px;
 
-    margin-bottom:45px;
+    margin-bottom:20px;
 
 }
 
@@ -172,19 +168,19 @@ HEADLINE
 
 .hero h1{
 
-    font-size:clamp(5rem,9vw,7.4rem);
+    font-size:clamp(4.8rem,8vw,6.9rem);
 
     font-weight:900;
 
-    line-height:.88;
+    line-height:.90;
 
     letter-spacing:-4px;
 
-    max-width:980px;
+    max-width:920px;
 
     text-shadow:
 
-        0 6px 35px rgba(0,0,0,.35);
+        0 12px 30px rgba(0,0,0,.35);
 
 }
 
@@ -194,15 +190,15 @@ SUBTEXT
 
 .subtext{
 
-    margin-top:40px;
+    margin-top:20px;
 
-    max-width:760px;
+    max-width:700px;
 
-    font-size:1.9rem;
-
-    line-height:1.55;
+    font-size:1.55rem;
 
     color:var(--text);
+
+    line-height:1.55;
 
 }
 
@@ -212,31 +208,31 @@ GREEN TEXT
 
 .green-text{
 
-    margin-top:25px;
+    margin-top:12px;
 
-    font-size:2.2rem;
+    font-size:2rem;
 
     font-weight:700;
 
-    color:var(--green-bright);
+    color:var(--green);
 
     text-shadow:
 
-        0 0 18px rgba(44,255,121,.28);
+        0 0 18px rgba(41,255,122,.30);
 
 }
 
 /* ===========================
-BUTTON
+CTA BUTTON
 =========================== */
 
 .hero-button{
 
-    margin-top:55px;
+    margin-top:28px;
 
-    width:430px;
+    width:420px;
 
-    height:74px;
+    height:70px;
 
     display:flex;
 
@@ -244,15 +240,15 @@ BUTTON
 
     align-items:center;
 
-    border-radius:999px;
-
     text-decoration:none;
 
-    font-size:1.55rem;
+    color:white;
+
+    font-size:1.4rem;
 
     font-weight:800;
 
-    color:white;
+    border-radius:999px;
 
     position:relative;
 
@@ -260,20 +256,14 @@ BUTTON
 
     background:
 
-    linear-gradient(
-        90deg,
-
-        #ff1f1f 0%,
-
-        #c80000 30%,
-
-        #aa5600 52%,
-
-        #24b85c 78%,
-
-        #37ff86 100%
-
-    );
+        linear-gradient(
+            90deg,
+            #ff2323,
+            #c70000 35%,
+            #995400 60%,
+            #27bf64 82%,
+            #37ff86
+        );
 
     border:
 
@@ -281,17 +271,15 @@ BUTTON
 
     box-shadow:
 
-        0 18px 45px rgba(0,0,0,.45),
+        0 18px 45px rgba(0,0,0,.40),
 
-        0 0 40px rgba(255,0,0,.18),
+        0 0 35px rgba(255,0,0,.20),
 
-        0 0 60px rgba(44,255,121,.18);
+        0 0 45px rgba(41,255,122,.18);
 
-    transition:.35s;
+    transition:.30s;
 
 }
-
-/* Gloss */
 
 .hero-button::before{
 
@@ -305,7 +293,7 @@ BUTTON
 
     width:100%;
 
-    height:50%;
+    height:48%;
 
     background:
 
@@ -320,68 +308,28 @@ BUTTON
 
     transform:
 
-        translateY(-4px)
+        translateY(-3px)
         scale(1.02);
 
 }
 
 /* ===========================
-ARROW
+HEADINGS
 =========================== */
-
-.scroll-arrow{
-
-    margin-top:45px;
-
-    font-size:3rem;
-
-    color:white;
-
-    text-decoration:none;
-
-    opacity:.8;
-
-    transition:.3s;
-
-}
-
-.scroll-arrow:hover{
-
-    transform:translateY(8px);
-
-    opacity:1;
-
-}
-/* ==========================================
-   YOVIK V3
-   PART 2 - FEATURES
-========================================== */
-
-/* Main Sections */
-
-section{
-
-    padding:140px 40px;
-
-    background:#050505;
-
-}
 
 .section-label{
 
     text-align:center;
 
-    color:#2cff79;
+    color:var(--green);
 
-    letter-spacing:7px;
+    letter-spacing:6px;
 
-    font-size:.95rem;
+    font-size:.9rem;
 
     font-weight:800;
 
-    margin-bottom:25px;
-
-    text-transform:uppercase;
+    margin-bottom:18px;
 
 }
 
@@ -389,39 +337,81 @@ section{
 
     text-align:center;
 
-    font-size:clamp(3.8rem,7vw,5.8rem);
+    font-size:clamp(3.3rem,6vw,5rem);
 
     font-weight:900;
 
-    line-height:.95;
+    line-height:.94;
 
     letter-spacing:-3px;
 
-    margin-bottom:90px;
+    margin-bottom:45px;
 
 }
 
 .section-heading span{
 
-    color:#2cff79;
+    color:var(--green);
+
+}
+/* ==========================================
+   YOVIK V4
+   PART 2 — FEATURES
+========================================== */
+
+/* ==========================
+   FEATURES SECTION
+========================== */
+
+#features{
+
+    position:relative;
+
+    padding-top:45px;
+    padding-bottom:70px;
+
+}
+
+#features::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:85%;
+    height:1px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.10),
+            transparent
+        );
 
 }
 
 /* ==========================
-   FEATURE GRID
+   GRID
 ========================== */
 
 .cards{
 
-    max-width:1450px;
+    max-width:1350px;
 
-    margin:auto;
+    margin:0 auto;
 
     display:grid;
 
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 
-    gap:28px;
+    gap:22px;
 
 }
 
@@ -433,6 +423,8 @@ section{
 
     position:relative;
 
+    min-height:170px;
+
     background:
 
         linear-gradient(
@@ -443,9 +435,7 @@ section{
 
     border:1px solid rgba(255,255,255,.08);
 
-    border-radius:24px;
-
-    min-height:230px;
+    border-radius:22px;
 
     display:flex;
 
@@ -455,13 +445,14 @@ section{
 
     overflow:hidden;
 
-    transition:.35s;
-
-    cursor:default;
+    transition:
+        transform .30s ease,
+        border-color .30s ease,
+        box-shadow .30s ease;
 
 }
 
-/* subtle glow */
+/* soft highlight */
 
 .card::before{
 
@@ -474,28 +465,20 @@ section{
     background:
 
         radial-gradient(
-
             circle at top,
-
-            rgba(255,255,255,.06),
-
+            rgba(255,255,255,.05),
             transparent 60%
-
         );
 
     opacity:0;
 
-    transition:.35s;
+    transition:.30s;
 
 }
 
-/* hover */
-
 .card:hover{
 
-    transform:
-
-        translateY(-10px);
+    transform:translateY(-8px);
 
     border-color:
 
@@ -503,7 +486,7 @@ section{
 
     box-shadow:
 
-        0 22px 45px rgba(0,0,0,.45);
+        0 18px 40px rgba(0,0,0,.40);
 
 }
 
@@ -513,7 +496,9 @@ section{
 
 }
 
-/* card text */
+/* ==========================
+   CARD TITLE
+========================== */
 
 .card h3{
 
@@ -521,13 +506,15 @@ section{
 
     z-index:2;
 
-    font-size:1.8rem;
-
-    font-weight:800;
+    padding:20px;
 
     text-align:center;
 
-    padding:25px;
+    font-size:1.55rem;
+
+    font-weight:800;
+
+    line-height:1.25;
 
 }
 
@@ -539,17 +526,13 @@ section{
 
     position:absolute;
 
+    left:0;
     bottom:0;
 
-    left:0;
-
     width:100%;
-
-    height:5px;
+    height:4px;
 
 }
-
-/* colors */
 
 .red{
 
@@ -559,7 +542,7 @@ section{
 
 .orange{
 
-    background:#ff7a00;
+    background:#ff7600;
 
 }
 
@@ -571,7 +554,7 @@ section{
 
 .green{
 
-    background:#1ecb6d;
+    background:#18c765;
 
 }
 
@@ -582,222 +565,24 @@ section{
 }
 
 /* ==========================
-   SECTION DIVIDER
+   FEATURE SECTION SPACING
 ========================== */
 
-#features{
+.section-label{
 
-    position:relative;
+    margin-bottom:12px;
 
 }
 
-#features::before{
+.section-heading{
 
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:90%;
-
-    height:1px;
-
-    background:
-
-        linear-gradient(
-
-            90deg,
-
-            transparent,
-
-            rgba(255,255,255,.12),
-
-            transparent
-
-        );
+    margin-bottom:35px;
 
 }
 /* ==========================================
-   YOVIK V3
-   PART 3 - PRICING + FAQ
+   YOVIK V4
+   PART 3 — FAQ + FOOTER + POLISH
 ========================================== */
-
-/* ==========================
-   PRICING
-========================== */
-
-#pricing{
-
-    position:relative;
-
-    text-align:center;
-
-    overflow:hidden;
-
-}
-
-/* Green ambient glow */
-
-#pricing::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:900px;
-
-    height:900px;
-
-    left:50%;
-
-    bottom:-550px;
-
-    transform:translateX(-50%);
-
-    border-radius:50%;
-
-    background:
-
-        radial-gradient(
-
-            circle,
-
-            rgba(44,255,121,.18),
-
-            transparent 70%
-
-        );
-
-    pointer-events:none;
-
-}
-
-/* ==========================
-   PRICE
-========================== */
-
-.price{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:flex-end;
-
-    gap:8px;
-
-    margin-bottom:45px;
-
-}
-
-.dollar{
-
-    font-size:4rem;
-
-    font-weight:900;
-
-    line-height:1;
-
-    background:linear-gradient(180deg,#ffffff,#8efdb7);
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-
-}
-
-.number{
-
-    font-size:clamp(7rem,13vw,10rem);
-
-    font-weight:900;
-
-    line-height:.9;
-
-    letter-spacing:-6px;
-
-    background:
-        linear-gradient(
-            180deg,
-            #ffffff,
-            #86ffb4,
-            #2cff79
-        );
-
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    background-clip:text;
-
-    text-shadow:
-
-        0 0 30px rgba(44,255,121,.18);
-
-}
-
-.month{
-
-    margin-bottom:18px;
-
-    font-size:1.5rem;
-
-    font-weight:800;
-
-    color:#2cff79;
-
-    letter-spacing:3px;
-
-}
-
-/* ==========================
-   BENEFITS
-========================== */
-
-.benefits{
-
-    max-width:1100px;
-
-    margin:70px auto 65px;
-
-    display:flex;
-
-    justify-content:center;
-
-    flex-wrap:wrap;
-
-    gap:22px;
-
-}
-
-.benefits div{
-
-    padding:18px 32px;
-
-    border-radius:999px;
-
-    border:1px solid rgba(255,255,255,.08);
-
-    background:#0d0d0d;
-
-    color:#d9d9d9;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-.benefits div:hover{
-
-    border-color:rgba(44,255,121,.35);
-
-    transform:translateY(-3px);
-
-}
 
 /* ==========================
    FAQ
@@ -805,9 +590,13 @@ section{
 
 #faq{
 
-    max-width:1100px;
+    max-width:1050px;
 
-    margin:auto;
+    margin:0 auto;
+
+    padding-top:55px;
+
+    padding-bottom:70px;
 
 }
 
@@ -819,17 +608,26 @@ section{
 
     border-radius:18px;
 
-    margin-bottom:18px;
+    margin-bottom:14px;
 
     overflow:hidden;
 
-    transition:.3s;
+    transition:
+        border-color .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
 
 }
 
 #faq details:hover{
 
-    border-color:rgba(44,255,121,.30);
+    transform:translateY(-2px);
+
+    border-color:rgba(41,255,122,.28);
+
+    box-shadow:
+
+        0 10px 30px rgba(0,0,0,.25);
 
 }
 
@@ -839,17 +637,17 @@ section{
 
     cursor:pointer;
 
-    padding:28px 34px;
-
-    font-size:1.3rem;
-
-    font-weight:700;
-
     display:flex;
 
     justify-content:space-between;
 
     align-items:center;
+
+    padding:22px 28px;
+
+    font-size:1.15rem;
+
+    font-weight:700;
 
 }
 
@@ -859,19 +657,17 @@ section{
 
 }
 
-/* Green "+" */
-
 #faq summary::after{
 
     content:"+";
 
-    color:#2cff79;
+    color:var(--green);
 
-    font-size:2rem;
+    font-size:1.8rem;
 
     font-weight:300;
 
-    transition:.3s;
+    transition:.25s;
 
 }
 
@@ -883,19 +679,13 @@ section{
 
 #faq details p{
 
-    padding:0 34px 30px;
+    padding:0 28px 24px;
 
     color:#bdbdbd;
 
-    line-height:1.8;
-
-    font-size:1.05rem;
+    line-height:1.7;
 
 }
-/* ==========================================
-   YOVIK V3
-   PART 4 - FOOTER + ANIMATIONS + RESPONSIVE
-========================================== */
 
 /* ==========================
    FOOTER
@@ -903,7 +693,7 @@ section{
 
 footer{
 
-    padding:90px 40px;
+    padding:55px 30px;
 
     border-top:1px solid rgba(255,255,255,.08);
 
@@ -915,74 +705,33 @@ footer{
 
 .footer-logo{
 
-    font-size:2rem;
+    font-size:1.8rem;
 
     font-weight:900;
 
-    letter-spacing:12px;
+    letter-spacing:10px;
 
-    margin-bottom:18px;
+    margin-bottom:12px;
 
 }
 
 footer p{
 
-    color:#8f8f8f;
+    color:#7f7f7f;
 
-    font-size:.95rem;
-
-    line-height:1.8;
+    font-size:.9rem;
 
 }
 
 /* ==========================
-   SCROLL ANIMATIONS
-========================== */
-
-.hidden{
-
-    opacity:0;
-
-    transform:translateY(50px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
-
-}
-
-.show{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-/* ==========================
-   GLOBAL HOVER POLISH
+   BUTTON POLISH
 ========================== */
 
 .hero-button{
 
-    transition:
-        transform .30s ease,
-        box-shadow .30s ease,
-        filter .30s ease;
+    position:relative;
 
-}
-
-.hero-button:hover{
-
-    filter:brightness(1.08);
-
-    box-shadow:
-
-        0 20px 55px rgba(0,0,0,.45),
-
-        0 0 45px rgba(255,0,0,.28),
-
-        0 0 60px rgba(44,255,121,.28);
+    overflow:hidden;
 
 }
 
@@ -992,36 +741,14 @@ footer p{
 
 }
 
-.card{
+.hero-button:hover{
 
-    transition:
-
-        transform .30s ease,
-
-        border-color .30s ease,
-
-        box-shadow .30s ease;
-
-}
-
-details{
-
-    transition:
-
-        border-color .30s ease,
-
-        transform .30s ease;
-
-}
-
-details:hover{
-
-    transform:translateY(-2px);
+    filter:brightness(1.08);
 
 }
 
 /* ==========================
-   CUSTOM SCROLLBAR
+   SCROLLBAR
 ========================== */
 
 ::-webkit-scrollbar{
@@ -1038,7 +765,7 @@ details:hover{
 
 ::-webkit-scrollbar-thumb{
 
-    background:#303030;
+    background:#323232;
 
     border-radius:999px;
 
@@ -1046,7 +773,7 @@ details:hover{
 
 ::-webkit-scrollbar-thumb:hover{
 
-    background:#4b4b4b;
+    background:#505050;
 
 }
 
@@ -1056,9 +783,33 @@ details:hover{
 
 ::selection{
 
-    background:#2cff79;
+    background:var(--green);
 
     color:black;
+
+}
+
+/* ==========================
+   SIMPLE FADE ANIMATION
+========================== */
+
+.hidden{
+
+    opacity:0;
+
+    transform:translateY(30px);
+
+    transition:
+        opacity .7s ease,
+        transform .7s ease;
+
+}
+
+.show{
+
+    opacity:1;
+
+    transform:translateY(0);
 
 }
 
@@ -1066,71 +817,21 @@ details:hover{
    RESPONSIVE
 ========================== */
 
-@media (max-width:1100px){
+@media (max-width:900px){
 
-.hero h1{
+.hero{
 
-    font-size:5.2rem;
+    min-height:auto;
 
-    letter-spacing:-2px;
+    padding:80px 20px;
 
 }
 
-.section-heading{
+.hero h1{
 
     font-size:4rem;
 
-}
-
-.cards{
-
-    grid-template-columns:
-
-    repeat(2,1fr);
-
-}
-
-.hero-button{
-
-    width:360px;
-
-}
-
-}
-
-@media (max-width:768px){
-
-section{
-
-    padding:90px 24px;
-
-}
-
-.brand{
-
-    font-size:1.2rem;
-
-    letter-spacing:10px;
-
-}
-
-.hero h1{
-
-    font-size:3.6rem;
-
-    line-height:.95;
-
-}
-
-.subtext{
-
-    font-size:1.3rem;
-
-}
-
-.green-text{
-
-    font-size:1.5rem;
+    letter-spacing:-2px;
 
 }
 
@@ -1140,9 +841,47 @@ section{
 
     max-width:360px;
 
-    height:64px;
+}
 
-    font-size:1.2rem;
+.cards{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media (max-width:700px){
+
+section{
+
+    padding:55px 22px;
+
+}
+
+.brand{
+
+    letter-spacing:10px;
+
+    font-size:1.15rem;
+
+}
+
+.hero h1{
+
+    font-size:3rem;
+
+}
+
+.subtext{
+
+    font-size:1.15rem;
+
+}
+
+.green-text{
+
+    font-size:1.35rem;
 
 }
 
@@ -1152,47 +891,15 @@ section{
 
 }
 
-.price{
+.card{
 
-    flex-direction:column;
-
-    align-items:center;
-
-    gap:0;
-
-}
-
-.number{
-
-    font-size:6rem;
-
-}
-
-.month{
-
-    margin-bottom:0;
-
-}
-
-.benefits{
-
-    flex-direction:column;
-
-    align-items:center;
-
-}
-
-.benefits div{
-
-    width:100%;
-
-    max-width:380px;
+    min-height:145px;
 
 }
 
 .section-heading{
 
-    font-size:3rem;
+    font-size:2.8rem;
 
 }
 
@@ -1202,131 +909,28 @@ section{
 
 .hero h1{
 
-    font-size:2.9rem;
+    font-size:2.5rem;
 
 }
 
-.subtext{
+.hero-button{
 
-    font-size:1.05rem;
+    height:62px;
 
-}
-
-.green-text{
-
-    font-size:1.25rem;
+    font-size:1.1rem;
 
 }
 
 .section-heading{
 
-    font-size:2.4rem;
+    font-size:2.2rem;
 
 }
 
 .footer-logo{
 
-    letter-spacing:7px;
+    letter-spacing:6px;
 
 }
-
-}
-
-/* ==========================================
-   SMOOTH SECTION FADE
-========================================== */
-
-section{
-
-    animation:
-
-        fadeUp .8s ease;
-
-}
-
-@keyframes fadeUp{
-
-from{
-
-    opacity:0;
-
-    transform:translateY(25px);
-
-}
-
-to{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-}
-
-/* ==========================================
-   FINAL POLISH
-========================================== */
-
-.hero{
-
-    box-shadow:
-
-        inset 0 -150px 180px rgba(0,0,0,.45);
-
-}
-
-.card,
-
-.hero-button,
-
-details{
-
-    backdrop-filter:blur(10px);
-
-}
-
-html{
-
-    scroll-padding-top:40px;
-
-}
-/* Ripple Effect */
-
-.hero-button {
-
-    position: relative;
-    overflow: hidden;
-
-}
-
-.ripple {
-
-    position: absolute;
-
-    width: 20px;
-    height: 20px;
-
-    border-radius: 50%;
-
-    background: rgba(255,255,255,.45);
-
-    transform: translate(-50%, -50%) scale(0);
-
-    animation: ripple .6s ease-out;
-
-    pointer-events: none;
-
-}
-
-@keyframes ripple {
-
-    to {
-
-        transform: translate(-50%, -50%) scale(20);
-
-        opacity: 0;
-
-    }
 
 }
