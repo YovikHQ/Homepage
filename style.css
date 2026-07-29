@@ -455,3 +455,26 @@ MOBILE
 }
 
 }
+/* ==========================
+ANIMATIONS
+========================== */
+
+.hidden{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+
+}
+
+.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
