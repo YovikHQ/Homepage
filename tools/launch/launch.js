@@ -36,6 +36,8 @@ const potentialText = document.getElementById("potentialText");
 
 const businessButtons = document.querySelectorAll(".business-card");
 
+console.log("Found buttons:", businessButtons.length);
+
 let selectedBusiness = "other";
 
 function value(id) {
