@@ -56,6 +56,11 @@ function calculate() {
         value("pricePerSale") -
         value("costPerSale");
 
+    const profitMargin =
+        value("pricePerSale") > 0
+            ? profitPerSale / value("pricePerSale")
+            : 0;    
+
     const daily =
         value("salesPerDay") *
         profitPerSale;
@@ -92,13 +97,19 @@ function calculate() {
     updatePotential(
         startup,
         daily,
-        profitPerSale
+        profitPerSale,
+        profitMargin
     );
 
 }
 
 calculate();
-function updatePotential(startup, dailyProfit, profitPerSale) {
+function updatePotential(
+    startup,
+    dailyProfit,
+    profitPerSale,
+    profitMargin
+) {
 
     let score = 0;
 
@@ -119,27 +130,35 @@ function updatePotential(startup, dailyProfit, profitPerSale) {
 
 score += startupScore;
 
-    // Daily profit (0-40 points)
-    if (dailyProfit >= 500) {
-        score += 40;
-    } else if (dailyProfit >= 300) {
-        score += 30;
-    } else if (dailyProfit >= 200) {
-        score += 20;
-    } else if (dailyProfit >= 100) {
-        score += 10;
+    // Daily Profit Score (0–40 points)
+
+    let dailyScore = 0;
+
+    if (dailyProfit > 0) {
+
+        dailyScore = Math.min(
+            40,
+            dailyProfit / 12.5
+        );
+
     }
 
-    // Profit per sale (0-35 points)
-    if (profitPerSale >= 5) {
-        score += 35;
-    } else if (profitPerSale >= 4) {
-        score += 28;
-    } else if (profitPerSale >= 3) {
-        score += 20;
-    } else if (profitPerSale >= 2) {
-        score += 10;
+    score += dailyScore;
+
+    // Profit Margin (0–35 points)
+
+    let marginScore = 0;
+
+    if (profitMargin > 0) {
+
+        marginScore = Math.min(
+            35,
+            profitMargin * 50
+        );
+
     }
+
+    score += marginScore;
 
     if (score > 100) score = 100;
 
