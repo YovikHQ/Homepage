@@ -102,18 +102,22 @@ function updatePotential(startup, dailyProfit, profitPerSale) {
 
     let score = 0;
 
-    // Startup investment (0-25 points)
-    if (startup <= 5000) {
-        score += 25;
-    } else if (startup <= 10000) {
-        score += 20;
-    } else if (startup <= 20000) {
-        score += 15;
-    } else if (startup <= 40000) {
-        score += 10;
-    } else {
-        score += 5;
-    }
+    // Startup Efficiency (0–25 points)
+
+    let startupScore = 25;
+
+    if (startup > 0 && dailyProfit > 0) {
+
+        const paybackDays = startup / dailyProfit;
+
+        startupScore = Math.max(
+            0,
+            25 - (paybackDays / 4)
+    );
+
+}
+
+score += startupScore;
 
     // Daily profit (0-40 points)
     if (dailyProfit >= 500) {
