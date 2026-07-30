@@ -355,3 +355,9 @@ main{
 }
 
 }
+
+.business-btn.active {
+    background: #16a34a;
+    color: white;
+    border-color: #16a34a;
+}

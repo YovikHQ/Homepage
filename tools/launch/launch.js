@@ -34,6 +34,10 @@ const potentialPercent = document.getElementById("potentialPercent");
 const progressFill = document.getElementById("progressFill");
 const potentialText = document.getElementById("potentialText");
 
+const businessButtons = document.querySelectorAll(".business-btn");
+
+let selectedBusiness = "other";
+
 function value(id) {
     return Number(inputs[id].value) || 0;
 }
@@ -204,3 +208,25 @@ function updatePotential(
     }
 
 }
+
+businessButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        // Remove the active class from all buttons
+        businessButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        // Highlight the clicked button
+        button.classList.add("active");
+
+        // Save the selected business
+        selectedBusiness = button.dataset.business;
+
+        // For testing
+        console.log("Selected:", selectedBusiness);
+
+    });
+
+});
