@@ -50,6 +50,58 @@ section{
 
 }
 
+/* ==========================
+   Navigation
+========================== */
+
+.hero-nav{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:70px;
+
+}
+
+.brand{
+
+    color:white;
+
+    font-size:1.8rem;
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    text-decoration:none;
+
+}
+
+.nav-links{
+
+    display:flex;
+    gap:32px;
+
+}
+
+.nav-links a{
+
+    color:#cfcfcf;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.nav-links a:hover{
+
+    color:#00c853;
+
+}
+
 /* ===========================
 HERO
 =========================== */
