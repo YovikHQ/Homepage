@@ -935,66 +935,91 @@ section{
 
 }
 
+/* ==========================
+   Launch Banner
+========================== */
+
 .launch-banner{
 
     max-width:1200px;
-    margin:90px auto;
-
-    padding:60px 40px;
+    margin:100px auto;
+    padding:70px 40px;
 
     text-align:center;
 
+    border-radius:24px;
+
     background:linear-gradient(
         135deg,
-        #141414,
-        #1d1d1d
+        rgba(190,30,45,.18) 0%,
+        rgba(20,20,20,1) 45%,
+        rgba(0,200,83,.18) 100%
     );
 
-    border:1px solid #2d2d2d;
-    border-radius:22px;
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 0 60px rgba(0,0,0,.45),
+        inset 0 0 0 1px rgba(255,255,255,.03);
 
 }
 
 .launch-banner h2{
 
-    font-size:2.8rem;
-    margin-bottom:30px;
+    font-size:3rem;
+    font-weight:800;
 
-    color:#fff;
+    margin-bottom:35px;
+
+    color:white;
+    letter-spacing:-1px;
 
 }
 
 .launch-btn{
 
-    display:inline-block;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
 
     padding:18px 36px;
 
-    background:#00c853;
-
-    color:#fff;
-
-    font-size:1.1rem;
-    font-weight:700;
-
     text-decoration:none;
+
+    color:white;
+
+    font-size:1.05rem;
+    font-weight:700;
 
     border-radius:14px;
 
-    transition:.25s ease;
+    background:linear-gradient(
+        90deg,
+        #d32f2f,
+        #00c853
+    );
+
+    transition:
+        transform .25s,
+        box-shadow .25s;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.35);
 
 }
 
 .launch-btn:hover{
 
-    transform:translateY(-4px);
+    transform:translateY(-4px) scale(1.03);
 
-    box-shadow:0 12px 35px rgba(0,200,83,.35);
+    box-shadow:
+        0 18px 45px rgba(0,200,83,.35);
 
 }
 
 .launch-btn strong{
 
-    font-weight:800;
+    color:white;
+    font-weight:900;
 
 }
