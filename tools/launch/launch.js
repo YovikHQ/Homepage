@@ -34,7 +34,7 @@ const potentialPercent = document.getElementById("potentialPercent");
 const progressFill = document.getElementById("progressFill");
 const potentialText = document.getElementById("potentialText");
 
-const businessButtons = document.querySelectorAll(".business-btn");
+const businessButtons = document.querySelectorAll(".business-card");
 
 let selectedBusiness = "other";
 
