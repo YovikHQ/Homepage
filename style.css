@@ -934,3 +934,67 @@ section{
 }
 
 }
+
+.launch-banner{
+
+    max-width:1200px;
+    margin:90px auto;
+
+    padding:60px 40px;
+
+    text-align:center;
+
+    background:linear-gradient(
+        135deg,
+        #141414,
+        #1d1d1d
+    );
+
+    border:1px solid #2d2d2d;
+    border-radius:22px;
+
+}
+
+.launch-banner h2{
+
+    font-size:2.8rem;
+    margin-bottom:30px;
+
+    color:#fff;
+
+}
+
+.launch-btn{
+
+    display:inline-block;
+
+    padding:18px 36px;
+
+    background:#00c853;
+
+    color:#fff;
+
+    font-size:1.1rem;
+    font-weight:700;
+
+    text-decoration:none;
+
+    border-radius:14px;
+
+    transition:.25s ease;
+
+}
+
+.launch-btn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 35px rgba(0,200,83,.35);
+
+}
+
+.launch-btn strong{
+
+    font-weight:800;
+
+}
