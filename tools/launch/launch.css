@@ -1,0 +1,357 @@
+/* ==========================
+   YOVIK Launch Calculator
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Segoe UI,Arial,sans-serif;
+    background:#090909;
+    color:#fff;
+    line-height:1.6;
+    overflow-x:hidden;
+}
+
+.mouse-glow{
+    position:fixed;
+    width:300px;
+    height:300px;
+    background:radial-gradient(circle,
+    rgba(0,255,120,.18) 0%,
+    transparent 70%);
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:0;
+}
+
+.hero{
+    min-height:55vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 20px;
+    background:
+    radial-gradient(circle at top right,
+    rgba(0,255,120,.08),
+    transparent 40%),
+    radial-gradient(circle at bottom left,
+    rgba(255,0,0,.12),
+    transparent 45%);
+}
+
+.hero-content{
+    max-width:850px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:999px;
+    background:#111;
+    border:1px solid #1f1f1f;
+    color:#00d26a;
+    font-size:.8rem;
+    letter-spacing:1px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:clamp(3rem,7vw,5rem);
+    margin-bottom:10px;
+    font-weight:800;
+}
+
+.subtitle{
+    font-size:1.4rem;
+    color:#bcbcbc;
+    margin-bottom:20px;
+}
+
+.description{
+    max-width:650px;
+    margin:0 auto 40px;
+    color:#8d8d8d;
+}
+
+.hero-button{
+    display:inline-block;
+    background:#00c853;
+    color:#fff;
+    text-decoration:none;
+    padding:15px 32px;
+    border-radius:12px;
+    font-weight:700;
+    transition:.25s;
+}
+
+.hero-button:hover{
+    transform:translateY(-2px);
+    background:#00db5c;
+}
+
+main{
+    position:relative;
+    z-index:2;
+}
+
+.workspace{
+    max-width:1400px;
+    margin:auto;
+    padding:50px 25px;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:30px;
+    align-items:start;
+}
+
+.card{
+    background:#111;
+    border:1px solid #202020;
+    border-radius:18px;
+    padding:28px;
+    margin-bottom:25px;
+    backdrop-filter:blur(10px);
+}
+
+.card h2{
+    margin-bottom:10px;
+    font-size:1.4rem;
+}
+
+.card p{
+    color:#9d9d9d;
+    margin-bottom:20px;
+}
+.planner{
+    display:flex;
+    flex-direction:column;
+}
+
+.snapshot{
+    position:sticky;
+    top:30px;
+}
+
+.snapshot-card{
+    min-height:650px;
+}
+
+.business-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.business-card{
+    background:#181818;
+    border:1px solid #2b2b2b;
+    border-radius:14px;
+    color:#fff;
+    padding:18px;
+    cursor:pointer;
+    font-size:1rem;
+    transition:.25s;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:10px;
+}
+
+.business-card:hover{
+    border-color:#00c853;
+    transform:translateY(-3px);
+}
+
+.business-card.active{
+    background:#00c853;
+    border-color:#00c853;
+}
+
+.business-card span{
+    font-weight:600;
+}
+
+.input-group{
+    display:flex;
+    flex-direction:column;
+    margin-bottom:20px;
+}
+
+.input-group label{
+    margin-bottom:8px;
+    color:#cfcfcf;
+    font-size:.95rem;
+}
+
+.input-group input{
+    width:100%;
+    padding:14px;
+    border-radius:10px;
+    border:1px solid #2b2b2b;
+    background:#1a1a1a;
+    color:#fff;
+    font-size:1rem;
+    outline:none;
+    transition:.2s;
+}
+
+.input-group input:focus{
+    border-color:#00c853;
+    box-shadow:0 0 0 3px rgba(0,200,83,.15);
+}
+
+.stat{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 0;
+    border-bottom:1px solid #222;
+}
+
+.stat span{
+    color:#bdbdbd;
+}
+
+.stat strong{
+    font-size:1.4rem;
+    color:#00d26a;
+}
+.potential{
+    margin-top:35px;
+}
+
+.potential-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+.progress-bar{
+    width:100%;
+    height:14px;
+    background:#222;
+    border-radius:999px;
+    overflow:hidden;
+    margin-bottom:15px;
+}
+
+.progress-fill{
+    width:0%;
+    height:100%;
+    background:linear-gradient(90deg,#ff3b30,#ffd60a,#00c853);
+    transition:width .4s ease;
+}
+
+#potentialText{
+    color:#9c9c9c;
+    margin-top:10px;
+}
+
+.upgrade{
+    max-width:1000px;
+    margin:70px auto;
+    padding:50px 30px;
+    text-align:center;
+    background:#111;
+    border:1px solid #222;
+    border-radius:20px;
+}
+
+.upgrade h2{
+    font-size:2rem;
+    margin-bottom:15px;
+}
+
+.upgrade p{
+    color:#9d9d9d;
+    max-width:650px;
+    margin:0 auto 30px;
+}
+
+.email-signup{
+    max-width:700px;
+    margin:0 auto 80px;
+    text-align:center;
+    padding:0 20px;
+}
+
+.email-signup h2{
+    margin-bottom:15px;
+}
+
+.email-signup p{
+    color:#9d9d9d;
+    margin-bottom:25px;
+}
+
+.email-signup form{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.email-signup input{
+    flex:1;
+    min-width:260px;
+    padding:15px;
+    border-radius:10px;
+    border:1px solid #2b2b2b;
+    background:#1a1a1a;
+    color:#fff;
+}
+
+.email-signup button{
+    padding:15px 28px;
+    border:none;
+    border-radius:10px;
+    background:#00c853;
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.email-signup button:hover{
+    background:#00db5c;
+    transform:translateY(-2px);
+}
+
+@media (max-width:950px){
+
+.workspace{
+    grid-template-columns:1fr;
+}
+
+.snapshot{
+    position:static;
+}
+
+.business-grid{
+    grid-template-columns:1fr;
+}
+
+.hero h1{
+    font-size:3rem;
+}
+
+.email-signup form{
+    flex-direction:column;
+}
+
+.email-signup button,
+.email-signup input{
+    width:100%;
+}
+
+}
