@@ -60,9 +60,9 @@ section{
     justify-content:space-between;
     align-items:center;
 
-    margin-bottom:70px;
+    width:100%;
 
-    margin-left:-30px;
+    margin-bottom:90px;
 
 }
 
@@ -83,6 +83,8 @@ section{
 
     display:flex;
     gap:32px;
+
+    margin-left:auto;
 
 }
 
