@@ -7,6 +7,7 @@ const ids = [
     "license",
     "inventory",
     "misc",
+    "daysPerWeek",
     "salesPerDay",
     "pricePerSale",
     "costPerSale"
@@ -24,6 +25,7 @@ ids.forEach(id => {
 
 const startupTotal = document.getElementById("startupTotal");
 const dailyProfit = document.getElementById("dailyProfit");
+const weeklyProfit = document.getElementById("weeklyProfit");
 const monthlyProfit = document.getElementById("monthlyProfit");
 const annualProfit = document.getElementById("annualProfit");
 const payback = document.getElementById("payback");
@@ -58,11 +60,18 @@ function calculate() {
         value("salesPerDay") *
         profitPerSale;
 
-    const monthly = daily * 26;
-    const yearly = daily * 312;
+    const weekly =
+        daily * value("daysPerWeek");
+
+    const yearly =
+        weekly * 52;
+
+    const monthly =
+        yearly / 12;
 
     startupTotal.textContent = money(startup);
     dailyProfit.textContent = money(daily);
+    weeklyProfit.textContent = money(weekly);
     monthlyProfit.textContent = money(monthly);
     annualProfit.textContent = money(yearly);
 

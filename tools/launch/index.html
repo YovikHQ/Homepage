@@ -139,6 +139,18 @@ Start Planning
 <div class="card">
 
     <h2>Revenue Estimates</h2>
+    <div class="input-group">
+
+    <label>Days Per Week You'll Operate</label>
+
+    <input
+        id="daysPerWeek"
+        type="number"
+        min="1"
+        max="7"
+        value="5">
+
+</div>
 
     <div class="input-group">
         <label>Average Sales Per Day</label>
@@ -176,6 +188,11 @@ Start Planning
             <span>Estimated Daily Profit</span>
             <strong id="dailyProfit">$0</strong>
         </div>
+        
+        <div class="stat">
+            <span>Estimated Weekly Profit</span>
+            <strong id="weeklyProfit">$0</strong>
+        </div>
 
         <div class="stat">
             <span>Estimated Monthly Profit</span>
@@ -195,7 +212,7 @@ Start Planning
         <div class="potential">
 
             <div class="potential-header">
-                <span>Business Potential</span>
+                <span>Launch Score™</span>
                 <strong id="potentialPercent">0%</strong>
             </div>
 
@@ -204,7 +221,7 @@ Start Planning
             </div>
 
             <p id="potentialText">
-                Enter your numbers to calculate your potential.
+                Enter your numbers to calculate your Launch Score™
             </p>
 
         </div>
