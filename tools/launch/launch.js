@@ -97,6 +97,7 @@ function calculate() {
     updatePotential(
         startup,
         daily,
+        yearly,
         profitPerSale,
         profitMargin
     );
@@ -107,6 +108,7 @@ calculate();
 function updatePotential(
     startup,
     dailyProfit,
+    yearlyProfit,
     profitPerSale,
     profitMargin
 ) {
@@ -128,22 +130,22 @@ function updatePotential(
 
 }
 
-score += startupScore;
+    score += startupScore;
 
-    // Daily Profit Score (0–40 points)
+    // Annual Profit Score (0–40 points)
 
-    let dailyScore = 0;
+    let annualScore = 0;
 
-    if (dailyProfit > 0) {
+    if (yearlyProfit > 0) {
 
-        dailyScore = Math.min(
+        annualScore = Math.min(
             40,
-            dailyProfit / 12.5
+            yearlyProfit / 5000
         );
 
     }
 
-    score += dailyScore;
+    score += annualScore;
 
     // Profit Margin (0–35 points)
 
