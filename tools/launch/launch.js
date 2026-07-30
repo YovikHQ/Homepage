@@ -162,33 +162,42 @@ score += startupScore;
 
     if (score > 100) score = 100;
 
-    potentialPercent.textContent = score + "%";
-    progressFill.style.width = score + "%";
+    // Convert raw score (0–100) into displayed score (60–100)
+    let displayScore = 60 + (score * 0.40);
 
-    if (score >= 90) {
+    // Never exceed 100%
+    displayScore = Math.min(100, displayScore);
 
-        potentialText.textContent =
-            "★★★★★ Outstanding launch opportunity.";
+    // Round to a whole number
+    displayScore = Math.round(displayScore);
 
-    } else if (score >= 80) {
+    potentialPercent.textContent = displayScore + "%";
+    progressFill.style.width = displayScore + "%";
 
-        potentialText.textContent =
-            "★★★★☆ Strong launch opportunity.";
-
-    } else if (score >= 65) {
-
-        potentialText.textContent =
-            "★★★☆☆ Good potential with room to improve.";
-
-    } else if (score >= 50) {
+    if (displayScore >= 100) {
 
         potentialText.textContent =
-            "★★☆☆☆ High risk. Improve your numbers before launching.";
+            "🏆 Launch Ready — Your business fundamentals are exceptional."
+
+    } else if (displayScore >= 90) {
+
+        potentialText.textContent =
+            "🚀 Exceptional Opportunity — You're very close to an outstanding launch."
+
+    } else if (displayScore >= 80) {
+
+        potentialText.textContent =
+            "✅ Strong Opportunity — Your business has a solid foundation."
+
+    } else if (displayScore >= 70) {
+
+        potentialText.textContent =
+            "📈 Promising Opportunity — A few improvements could significantly strengthen your business."
 
     } else {
 
         potentialText.textContent =
-            "★☆☆☆☆ Not recommended based on the current inputs.";
+            "🛠️ Building Momentum — Keep refining your numbers. Every improvement moves you closer to a stronger launch."
 
     }
 
