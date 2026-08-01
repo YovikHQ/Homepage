@@ -1117,3 +1117,59 @@ section{
     font-weight:900;
 
 }
+
+/* ==========================
+   Mobile
+========================== */
+
+@media (max-width: 768px) {
+
+}
+.hero-nav{
+
+    flex-direction:column;
+
+    gap:20px;
+
+    text-align:center;
+
+}
+
+.nav-links{
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+}
+.hero h1{
+
+    font-size:2.5rem;
+
+    line-height:1.15;
+
+}
+.subtext{
+
+    font-size:1rem;
+
+    padding:0 20px;
+
+}
+.launch-btn{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    flex-wrap:wrap;
+
+    max-width:320px;
+
+}
