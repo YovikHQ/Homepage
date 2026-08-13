@@ -32,24 +32,34 @@ body{
     z-index:0;
 }
 
-.hero{
-    min-height:55vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:80px 20px;
-    background:
-    radial-gradient(circle at top right,
-    rgba(0,255,120,.08),
-    transparent 40%),
-    radial-gradient(circle at bottom left,
-    rgba(255,0,0,.12),
-    transparent 45%);
+.hero {
+    min-height: 55vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 120px 20px 80px;
+
+    box-sizing: border-box;
+
+    width: 100%;
+    max-width: 100%;
+
+    position: relative;
 }
 
-.hero-content{
-    max-width:850px;
+.hero-content {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+
+    box-sizing: border-box;
+
+    position: relative;
+    z-index: 2;
 }
 
 .badge{
