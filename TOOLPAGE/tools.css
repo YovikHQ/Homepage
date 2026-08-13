@@ -42,16 +42,47 @@ body{
 
 }
 
-.hero-nav{
+.hero-nav {
+    position: sticky;
 
-    display:flex;
+    top: 0;
 
-    justify-content:space-between;
+    z-index: 1000;
 
-    align-items:center;
+    display: flex;
 
-    margin-bottom:80px;
+    justify-content: space-between;
 
+    align-items: center;
+
+    padding: 16px 20px;
+
+    margin-bottom: 70px;
+
+    background: rgba(6, 16, 10, .88);
+
+    backdrop-filter: blur(14px);
+
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(0, 200, 83, .15);
+
+    border-radius: 16px;
+}
+
+.nav-btn.active {
+    background: linear-gradient(
+        90deg,
+        #d32f2f,
+        #00c853
+    );
+
+    border-color: transparent;
+
+    color: #fff;
+
+    box-shadow:
+        0 8px 25px rgba(0, 200, 83, .18);
 }
 
 .brand {
@@ -526,10 +557,19 @@ body {
     }
 
     .hero-nav {
-        margin-bottom: 55px;
-        gap: 10px;
-    }
+    position: sticky;
 
+    top: 0;
+
+    padding: 10px 12px;
+
+    margin-bottom: 50px;
+
+    border-radius: 14px;
+
+    gap: 8px;
+    }
+    
     .brand img {
         width: 65px;
     }
