@@ -108,121 +108,6 @@ body{
 
 }
 
-/* ==========================
-   YOVIK NAVIGATION
-========================== */
-
-.site-nav {
-
-    width: 100%;
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 1000;
-
-    background: rgba(5, 5, 5, .94);
-
-    backdrop-filter: blur(12px);
-
-    -webkit-backdrop-filter: blur(12px);
-
-    border-bottom: 2px solid transparent;
-
-    border-image: linear-gradient(
-        90deg,
-        #d32f2f,
-        #00c853
-    ) 1;
-
-}
-
-.site-nav-inner {
-
-    max-width: 1400px;
-
-    margin: 0 auto;
-
-    padding: 20px 40px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-}
-
-.site-logo {
-
-    display: flex;
-
-    align-items: center;
-
-    text-decoration: none;
-
-}
-
-.site-logo img {
-
-    width: 100px;
-
-    height: auto;
-
-    display: block;
-
-}
-
-.site-nav-links {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 4px;
-
-}
-
-.site-nav-links a {
-
-    color: #fff;
-
-    text-decoration: none;
-
-    font-size: 1rem;
-
-    font-weight: 600;
-
-    padding: 10px 16px;
-
-    border-radius: 12px;
-
-    transition: .25s ease;
-
-}
-
-.site-nav-links a:hover {
-
-    background: rgba(255,255,255,.08);
-
-}
-
-.site-nav-links a.active {
-
-    background: linear-gradient(
-        90deg,
-        #d32f2f,
-        #00c853
-    );
-
-    color: #fff;
-
-    box-shadow:
-        0 8px 25px rgba(0,200,83,.18);
-
-}
-
 
 /* ==========================
    Tool Library
@@ -767,46 +652,147 @@ body {
 }
 
 /* ==========================
+   YOVIK FIXED NAVIGATION
+========================== */
+
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+
+    padding: 16px 24px;
+
+    background: rgba(11, 11, 11, 0.82);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.site-nav::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        #d32f2f,
+        #00c853
+    );
+
+    opacity: 0.65;
+}
+
+.site-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.site-logo img {
+    width: 82px;
+    height: auto;
+    display: block;
+}
+
+.site-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.site-nav-links a {
+    color: #d5d5d5;
+    text-decoration: none;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    padding: 10px 16px;
+    border-radius: 10px;
+
+    transition: all 0.25s ease;
+}
+
+.site-nav-links a:hover {
+    color: #fff;
+    background: rgba(0, 200, 83, 0.12);
+}
+
+.site-nav-links a.active {
+    color: #fff;
+
+    background: linear-gradient(
+        90deg,
+        rgba(211, 47, 47, 0.85),
+        rgba(0, 200, 83, 0.85)
+    );
+
+    box-shadow: 0 6px 20px rgba(0, 200, 83, 0.15);
+}
+
+
+/* ==========================
    MOBILE NAVIGATION
 ========================== */
 
 @media (max-width: 768px) {
 
+    .site-nav {
+        padding: 12px 16px;
+    }
+
     .site-nav-inner {
-
         flex-direction: column;
-
-        gap: 12px;
-
-        padding: 14px 16px 18px;
-
+        gap: 10px;
     }
 
     .site-logo img {
-
-        width: 90px;
-
+        width: 70px;
+        height: auto;
     }
 
     .site-nav-links {
-
         width: 100%;
-
         justify-content: center;
-
         flex-wrap: wrap;
-
         gap: 4px;
-
     }
 
     .site-nav-links a {
-
         padding: 8px 12px;
-
-        font-size: .85rem;
-
+        font-size: 0.85rem;
     }
 
 }
 
+@media (max-width: 600px) {
+
+    .hero {
+        min-height: 85vh;
+        padding-top: 125px;
+        padding-bottom: 60px;
+        background-position: center center;
+    }
+
+    .site-logo img {
+        width: 70px;
+    }
+
+}
