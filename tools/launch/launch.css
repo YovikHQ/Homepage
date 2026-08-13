@@ -363,3 +363,61 @@ main{
     transform: translateY(-2px);
     color: #fff;
 }
+
+/* ================= YOVIK CALCULATOR NAV ================= */
+
+.calculator-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 20px 40px;
+
+    box-sizing: border-box;
+
+    z-index: 100;
+}
+
+.calculator-brand img {
+    width: 110px;
+    height: auto;
+    display: block;
+}
+
+.home-link {
+    color: white;
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    padding: 10px 18px;
+
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+
+    background: rgba(0,0,0,0.25);
+
+    transition: 0.2s ease;
+}
+
+.home-link:hover {
+    background: rgba(0,0,0,0.5);
+    border-color: rgba(0,255,120,0.7);
+    transform: translateY(-1px);
+}
+
+/* ================= CALCULATOR HERO SPACING ================= */
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    padding-top: 90px;
+}
+
