@@ -1214,12 +1214,16 @@ section{
 }
 
 .site-logo {
-    color: #fff;
-    text-decoration: none;
+    display: flex;
+    align-items: center;
 
-    font-size: 1.7rem;
-    font-weight: 900;
-    letter-spacing: 3px;
+    text-decoration: none;
+}
+
+.site-logo img {
+    width: 110px;
+    height: auto;
+    display: block;
 }
 
 .site-nav-links {
