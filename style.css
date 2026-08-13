@@ -164,6 +164,11 @@ HERO
 
     isolation: isolate;
 
+    padding-top: 90px;
+    padding-bottom: 50px;
+
+    box-sizing: border-box;
+
     background-image: url("images/yovik-hero.webp");
 
     background-size: cover;
@@ -1221,7 +1226,7 @@ section{
 }
 
 .site-logo img {
-    width: 110px;
+    width: 82px;
     height: auto;
     display: block;
 }
@@ -1273,8 +1278,9 @@ section{
         gap: 10px;
     }
 
-    .site-logo {
-        font-size: 1.45rem;
+    .site-logo img {
+        width: 70px;
+        height: auto;
     }
 
     .site-nav-links {
@@ -1290,4 +1296,20 @@ section{
     }
 
 }
+
+@media (max-width: 600px) {
+
+    .hero {
+        min-height: 85vh;
+        padding-top: 125px;
+        padding-bottom: 60px;
+        background-position: center center;
+    }
+
+    .site-logo img {
+        width: 70px;
+    }
+
+}
+
 
