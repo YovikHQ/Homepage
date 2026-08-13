@@ -42,59 +42,6 @@ body{
 
 }
 
-.hero-nav {
-    position: sticky;
-
-    top: 0;
-
-    z-index: 1000;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    padding: 16px 20px;
-
-    margin-bottom: 70px;
-
-    background: rgba(6, 16, 10, .88);
-
-    backdrop-filter: blur(14px);
-
-    -webkit-backdrop-filter: blur(14px);
-
-    border: 1px solid rgba(0, 200, 83, .15);
-
-    border-radius: 16px;
-}
-
-.nav-btn.active {
-    background: linear-gradient(
-        90deg,
-        #d32f2f,
-        #00c853
-    );
-
-    border-color: transparent;
-
-    color: #fff;
-
-    box-shadow:
-        0 8px 25px rgba(0, 200, 83, .18);
-}
-
-.brand {
-
-    display: flex;
-
-    align-items: center;
-
-    text-decoration: none;
-
-}
-
 .brand img {
 
     width: 90px;
@@ -102,38 +49,6 @@ body{
     height: auto;
 
     display: block;
-
-}
-
-.nav-links{
-
-    display:flex;
-
-    gap:18px;
-
-}
-
-.nav-btn{
-
-    padding:10px 20px;
-
-    border-radius:12px;
-
-    background:rgba(255,255,255,.08);
-
-    border:1px solid rgba(255,255,255,.12);
-
-    color:white;
-
-    text-decoration:none;
-
-    transition:.25s;
-
-}
-
-.nav-btn:hover{
-
-    background:#00c853;
 
 }
 
@@ -192,6 +107,116 @@ body{
     margin: 0 auto;
 
 }
+
+/* ==========================
+   YOVIK NAVIGATION
+========================== */
+
+.site-nav {
+
+    width: 100%;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    background: rgba(5, 5, 5, .94);
+
+    backdrop-filter: blur(12px);
+
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255,255,255,.08);
+
+}
+
+.site-nav-inner {
+
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    padding: 16px 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+.site-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    text-decoration: none;
+
+}
+
+.site-logo img {
+
+    width: 85px;
+
+    height: auto;
+
+    display: block;
+
+}
+
+.site-nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+.site-nav-links a {
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    padding: 10px 18px;
+
+    border-radius: 12px;
+
+    transition: .25s ease;
+
+}
+
+.site-nav-links a:hover {
+
+    background: rgba(255,255,255,.08);
+
+}
+
+.site-nav-links a.active {
+
+    background: linear-gradient(
+        90deg,
+        #d32f2f,
+        #00c853
+    );
+
+    color: #fff;
+
+    box-shadow:
+        0 8px 25px rgba(0,200,83,.18);
+
+}
+
 
 /* ==========================
    Tool Library
@@ -549,68 +574,6 @@ body {
 
 @media (max-width: 768px) {
 
-    /* Navigation */
-
-    .hero {
-        padding: 25px 16px 65px;
-        min-height: auto;
-    }
-
-    .hero-nav {
-    position: sticky;
-
-    top: 0;
-
-    padding: 10px 12px;
-
-    margin-bottom: 50px;
-
-    border-radius: 14px;
-
-    gap: 8px;
-    }
-    
-    .brand img {
-        width: 65px;
-    }
-
-    .nav-links {
-        gap: 5px;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-    }
-
-    .nav-btn {
-        padding: 8px 10px;
-        font-size: 0.78rem;
-        border-radius: 10px;
-    }
-
-
-    /* Hero */
-
-    .hero-content {
-        padding: 0 5px;
-    }
-
-    .badge {
-        font-size: 0.72rem;
-        padding: 7px 13px;
-        margin-bottom: 18px;
-    }
-
-    .hero h1 {
-        font-size: clamp(2.2rem, 10vw, 3.2rem);
-        line-height: 1.05;
-        margin-bottom: 15px;
-    }
-
-    .subtitle {
-        font-size: 1rem;
-        line-height: 1.5;
-    }
-
-
     /* Main Library */
 
     .tool-library {
@@ -793,6 +756,50 @@ body {
     .email-signup-form input,
     .email-signup-form button {
         width: 100%;
+    }
+
+}
+
+/* ==========================
+   MOBILE NAVIGATION
+========================== */
+
+@media (max-width: 768px) {
+
+    .site-nav-inner {
+
+        flex-direction: column;
+
+        gap: 12px;
+
+        padding: 14px 16px 18px;
+
+    }
+
+    .site-logo img {
+
+        width: 90px;
+
+    }
+
+    .site-nav-links {
+
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 4px;
+
+    }
+
+    .site-nav-links a {
+
+        padding: 8px 12px;
+
+        font-size: .85rem;
+
     }
 
 }
