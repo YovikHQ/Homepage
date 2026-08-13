@@ -148,55 +148,45 @@ section{
 HERO
 =========================== */
 
-.hero{
+.hero {
 
-    min-height:78vh;
+    min-height: 78vh;
 
-    display:flex;
+    display: flex;
 
-    justify-content:center;
+    justify-content: center;
 
-    align-items:center;
+    align-items: center;
 
-    position:relative;
+    position: relative;
 
-    overflow:hidden;
+    overflow: hidden;
 
-    isolation:isolate;
+    isolation: isolate;
 
-    background:
+    background-image: url("images/yovik-hero.webp");
 
-    linear-gradient(
-        180deg,
-        #b30000 0%,
-        #680000 18%,
-        #250000 38%,
-        #090909 58%,
-        #0c2d19 78%,
-        #0d6a39 100%
-    );
+    background-size: cover;
+
+    background-position: center center;
+
+    background-repeat: no-repeat;
 
 }
 
 /* RED LIGHT */
 
-.hero::before{
+.hero::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    inset:0;
+    inset: 0;
 
-    background:
+    background: rgba(0, 0, 0, 0.35);
 
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(255,0,0,.55),
-            transparent 65%
-        );
-
-    z-index:-2;
+    z-index: -1;
 
 }
 
