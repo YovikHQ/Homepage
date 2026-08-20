@@ -831,4 +831,247 @@ body {
 
 }
 
+/* ==========================
+   Checklist Email Popup
+========================== */
 
+.checklist-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.75);
+
+    backdrop-filter: blur(8px);
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 9999;
+}
+
+.checklist-overlay.active {
+
+    display: flex;
+}
+
+.checklist-popup {
+
+    position: relative;
+
+    width: 100%;
+    max-width: 500px;
+
+    padding: 40px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #181818,
+            #0f0f0f
+        );
+
+    border: 1px solid #2b2b2b;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.6),
+        0 0 40px rgba(0,200,83,.12);
+
+    text-align: center;
+}
+
+.popup-badge {
+
+    display: inline-block;
+
+    padding: 7px 14px;
+
+    margin-bottom: 18px;
+
+    border-radius: 999px;
+
+    background: rgba(0,200,83,.12);
+
+    border: 1px solid rgba(0,200,83,.25);
+
+    color: #00c853;
+
+    font-size: .75rem;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.checklist-popup h2 {
+
+    font-size: 2rem;
+
+    margin-bottom: 14px;
+}
+
+.checklist-popup p {
+
+    color: #bcbcbc;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+}
+
+.checklist-close {
+
+    position: absolute;
+
+    top: 14px;
+    right: 16px;
+
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.08);
+
+    color: white;
+
+    font-size: 1.5rem;
+
+    cursor: pointer;
+}
+
+.checklist-close:hover {
+
+    background: rgba(255,255,255,.15);
+}
+
+#checklistForm {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+
+    text-align: left;
+}
+
+#checklistForm label {
+
+    color: #d0d0d0;
+
+    font-size: .9rem;
+
+    font-weight: 600;
+}
+
+#checklistEmail {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    border: 1px solid #2b2b2b;
+
+    background: #1a1a1a;
+
+    color: white;
+
+    font-size: 1rem;
+
+    outline: none;
+}
+
+#checklistEmail:focus {
+
+    border-color: #00c853;
+
+    box-shadow:
+        0 0 0 3px rgba(0,200,83,.15);
+}
+
+.checklist-submit {
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin-top: 5px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #d32f2f,
+            #00c853
+        );
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.checklist-submit:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 30px rgba(0,200,83,.2);
+}
+
+#checklistForm small {
+
+    color: #777;
+
+    font-size: .72rem;
+
+    line-height: 1.5;
+
+    text-align: center;
+
+    margin-top: 4px;
+}
+
+
+/* ==========================
+   Checklist Popup Mobile
+========================== */
+
+@media (max-width: 600px) {
+
+    .checklist-popup {
+
+        padding: 32px 22px;
+
+        border-radius: 18px;
+    }
+
+    .checklist-popup h2 {
+
+        font-size: 1.6rem;
+    }
+
+    .checklist-popup p {
+
+        font-size: .9rem;
+    }
+
+}

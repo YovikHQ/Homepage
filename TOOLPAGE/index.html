@@ -152,9 +152,9 @@
                     your business for launch.
                 </p>
 
-                <a href="#" class="tool-button">
+                <button class="tool-button checklist-trigger">
                     Download FREE
-                </a>
+                </button>
 
             </div>
 
@@ -274,6 +274,59 @@
 </section>
 
 </main>
+
+<!-- ==========================
+     Checklist Email Popup
+========================== -->
+
+<div class="checklist-overlay" id="checklistOverlay">
+
+    <div class="checklist-popup">
+
+        <button class="checklist-close" id="checklistClose">
+            ×
+        </button>
+
+        <div class="popup-badge">
+            FREE YOVIK RESOURCE
+        </div>
+
+        <h2>
+            Get Your Free Food Vendor Checklist
+        </h2>
+
+        <p>
+            Get the YOVIK Mobile Food Vendor Launch Checklist
+            and make sure you're ready for your first sale.
+        </p>
+
+        <form id="checklistForm">
+
+            <label for="checklistEmail">
+                Email address
+            </label>
+
+            <input
+                type="email"
+                id="checklistEmail"
+                name="email"
+                placeholder="you@example.com"
+                required
+            >
+
+            <button type="submit" class="checklist-submit">
+                SEND ME THE FREE CHECKLIST
+            </button>
+
+            <small>
+                + YOVIK tips, tools, and updates. Unsubscribe anytime.
+            </small>
+
+        </form>
+
+    </div>
+
+</div>
 
 <script src="tools.js"></script>
 
