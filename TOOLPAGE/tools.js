@@ -32,3 +32,29 @@ checklistOverlay.addEventListener("click", function (event) {
 
 });
 
+const checklistForm =
+    document.getElementById("checklistForm");
+
+const checklistSubmit =
+    document.getElementById("checklistSubmit");
+
+const checklistSuccess =
+    document.getElementById("checklistSuccess");
+
+
+checklistForm.addEventListener("submit", function () {
+
+    checklistSubmit.disabled = true;
+
+    checklistSubmit.textContent = "SENDING...";
+
+    setTimeout(function () {
+
+        checklistForm.style.display = "none";
+
+        checklistSuccess.style.display = "block";
+
+    }, 1000);
+
+});
+

@@ -299,7 +299,12 @@
             A guide to getting your food business ready to launch.
         </p>
 
-        <form id="checklistForm">
+        <form
+            id="checklistForm"
+            method="POST"
+            action="https://73874b7b.sibforms.com/serve/MUIFAOKemF2raggVsme3OmmaKMoBkyNf5IkfM4YgefA9gAVzFa2sB7Af7Xc1i9iSpNK5a0t9SDvHeD3GoZ1nAJ_pPl6iPUDWKe9XMh0acOI1fbHLHRX1sDdl-7s-X0-9HQZvM1e6Q8fIk2Z7PR9ESVG4J0ZtH4V2g4XSsizW4xIMe0T7MX6YzCeqyQMEmO64bxPKS1P_v-EiniRNDg=="
+            target="brevoSubmissionFrame"
+        >
 
             <label for="checklistEmail">
                 Email address
@@ -308,12 +313,13 @@
             <input
                 type="email"
                 id="checklistEmail"
-                name="email"
+                name="EMAIL"
                 placeholder="you@example.com"
+                autocomplete="email"
                 required
             >
 
-            <button type="submit" class="checklist-submit">
+            <button type="submit" class="checklist-submit" id="checklistSubmit">
                 SEND ME THE FREE CHECKLIST
             </button>
 
@@ -321,7 +327,35 @@
                 + YOVIK tips, tools, and updates. Unsubscribe anytime.
             </small>
 
+            <!-- Brevo required fields -->
+            <input
+                type="text"
+                name="email_address_check"
+                value=""
+                style="display:none;"
+            >
+
+            <input
+                type="hidden"
+                name="locale"
+                value="en"
+            >
+
         </form>
+
+        <!-- Hidden frame keeps the visitor on the YOVIK website -->
+        <iframe
+            name="brevoSubmissionFrame"
+            style="display:none;"
+        ></iframe>
+
+        <!-- Success message -->
+        <div
+            id="checklistSuccess"
+            style="display:none;"
+        >
+            Your Business Launch Checklist™ is on its way! Check your inbox.
+        </div>
 
     </div>
 
