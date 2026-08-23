@@ -1,3 +1,7 @@
+/* ==========================
+   YOVIK Checklist Popup
+========================== */
+
 const checklistTrigger =
     document.querySelector(".checklist-trigger");
 
@@ -6,31 +10,6 @@ const checklistOverlay =
 
 const checklistClose =
     document.getElementById("checklistClose");
-
-
-checklistTrigger.addEventListener("click", function () {
-
-    checklistOverlay.classList.add("active");
-
-});
-
-
-checklistClose.addEventListener("click", function () {
-
-    checklistOverlay.classList.remove("active");
-
-});
-
-
-checklistOverlay.addEventListener("click", function (event) {
-
-    if (event.target === checklistOverlay) {
-
-        checklistOverlay.classList.remove("active");
-
-    }
-
-});
 
 const checklistForm =
     document.getElementById("checklistForm");
@@ -42,21 +21,55 @@ const checklistSuccess =
     document.getElementById("checklistSuccess");
 
 
-checklistForm.addEventListener("submit", function () {
+if (checklistTrigger && checklistOverlay && checklistClose) {
 
-    checklistSubmit.disabled = true;
+    checklistTrigger.addEventListener("click", function (event) {
 
-    checklistSubmit.textContent = "SENDING...";
+        event.preventDefault();
 
-    setTimeout(function () {
+        checklistOverlay.classList.add("active");
 
-        checklistForm.style.display = "none";
+    });
 
-        checklistSuccess.style.display = "block";
+    checklistClose.addEventListener("click", function () {
 
-    }, 1000);
+        checklistOverlay.classList.remove("active");
 
-});
+    });
+
+    checklistOverlay.addEventListener("click", function (event) {
+
+        if (event.target === checklistOverlay) {
+
+            checklistOverlay.classList.remove("active");
+
+        }
+
+    });
+
+}
+
+
+if (checklistForm && checklistSubmit && checklistSuccess) {
+
+    checklistForm.addEventListener("submit", function () {
+
+        checklistSubmit.disabled = true;
+
+        checklistSubmit.textContent = "SENDING...";
+
+        setTimeout(function () {
+
+            checklistForm.style.display = "none";
+
+            checklistSuccess.style.display = "block";
+
+        }, 1000);
+
+    });
+
+}
+
 
 /* ==========================
    YOVIK Service Waitlist
@@ -70,6 +83,7 @@ const waitlistOverlay =
 
 const waitlistClose =
     document.getElementById("waitlistClose");
+
 
 if (waitlistTrigger && waitlistOverlay && waitlistClose) {
 
