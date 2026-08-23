@@ -1075,3 +1075,123 @@ body {
     }
 
 }
+
+/* ==========================
+   YOVIK Service Waitlist
+========================== */
+
+.waitlist-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    z-index: 9999;
+}
+
+.waitlist-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.waitlist-popup {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    background: #ffffff;
+    color: #111111;
+    padding: 45px 35px 35px;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    text-align: center;
+}
+
+.waitlist-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    border: none;
+    background: transparent;
+    color: #111111;
+    font-size: 30px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.waitlist-badge {
+    display: inline-block;
+    margin-bottom: 18px;
+    padding: 6px 12px;
+    border-radius: 30px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.waitlist-popup h2 {
+    margin: 0 0 12px;
+    font-size: 32px;
+}
+
+.waitlist-popup p {
+    margin: 0 0 25px;
+    color: #555555;
+    line-height: 1.6;
+}
+
+.waitlist-popup form {
+    text-align: left;
+}
+
+.waitlist-popup label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: 600;
+}
+
+.waitlist-popup input[type="email"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 15px;
+    margin-bottom: 14px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+.waitlist-submit {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    background: #111111;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+}
+
+.waitlist-submit:hover {
+    opacity: 0.9;
+}
+
+.waitlist-popup small {
+    display: block;
+    margin-top: 12px;
+    color: #777777;
+    text-align: center;
+    font-size: 12px;
+}
+
+#waitlistSuccess h3 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}

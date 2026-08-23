@@ -58,3 +58,43 @@ checklistForm.addEventListener("submit", function () {
 
 });
 
+/* ==========================
+   YOVIK Service Waitlist
+========================== */
+
+const waitlistTrigger =
+    document.querySelector(".waitlist-trigger");
+
+const waitlistOverlay =
+    document.getElementById("waitlistOverlay");
+
+const waitlistClose =
+    document.getElementById("waitlistClose");
+
+if (waitlistTrigger && waitlistOverlay && waitlistClose) {
+
+    waitlistTrigger.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+        waitlistOverlay.classList.add("active");
+
+    });
+
+    waitlistClose.addEventListener("click", function () {
+
+        waitlistOverlay.classList.remove("active");
+
+    });
+
+    waitlistOverlay.addEventListener("click", function (event) {
+
+        if (event.target === waitlistOverlay) {
+
+            waitlistOverlay.classList.remove("active");
+
+        }
+
+    });
+
+}
