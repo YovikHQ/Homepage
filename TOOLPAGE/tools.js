@@ -1,114 +1,100 @@
-/* ==========================
-   YOVIK Checklist Popup
-========================== */
+/* =========================================================
+   YOVIK TOOLPAGE JAVASCRIPT
+   Checklist Popup
+========================================================= */
 
-const checklistTrigger =
-    document.querySelector(".checklist-trigger");
+document.addEventListener("DOMContentLoaded", function () {
 
-const checklistOverlay =
-    document.getElementById("checklistOverlay");
+    const checklistTrigger =
+        document.querySelector(".checklist-trigger");
 
-const checklistClose =
-    document.getElementById("checklistClose");
+    const checklistOverlay =
+        document.getElementById("checklistOverlay");
 
-const checklistForm =
-    document.getElementById("checklistForm");
+    const checklistClose =
+        document.getElementById("checklistClose");
 
-const checklistSubmit =
-    document.getElementById("checklistSubmit");
+    const checklistForm =
+        document.getElementById("checklistForm");
 
-const checklistSuccess =
-    document.getElementById("checklistSuccess");
+    const checklistSubmit =
+        document.getElementById("checklistSubmit");
+
+    const checklistSuccess =
+        document.getElementById("checklistSuccess");
 
 
-if (checklistTrigger && checklistOverlay && checklistClose) {
+    /* ==========================
+       OPEN / CLOSE CHECKLIST
+    ========================== */
 
-    checklistTrigger.addEventListener("click", function (event) {
+    if (checklistTrigger && checklistOverlay) {
 
-        event.preventDefault();
+        checklistTrigger.addEventListener("click", function (event) {
 
-        checklistOverlay.classList.add("active");
+            event.preventDefault();
 
-    });
+            checklistOverlay.classList.add("active");
 
-    checklistClose.addEventListener("click", function () {
+        });
 
-        checklistOverlay.classList.remove("active");
+    }
 
-    });
 
-    checklistOverlay.addEventListener("click", function (event) {
+    if (checklistClose && checklistOverlay) {
 
-        if (event.target === checklistOverlay) {
+        checklistClose.addEventListener("click", function () {
 
             checklistOverlay.classList.remove("active");
 
-        }
+        });
 
-    });
-
-}
+    }
 
 
-if (checklistForm && checklistSubmit && checklistSuccess) {
+    if (checklistOverlay) {
 
-    checklistForm.addEventListener("submit", function () {
+        checklistOverlay.addEventListener("click", function (event) {
 
-        checklistSubmit.disabled = true;
+            if (event.target === checklistOverlay) {
 
-        checklistSubmit.textContent = "SENDING...";
+                checklistOverlay.classList.remove("active");
 
-        setTimeout(function () {
+            }
 
-            checklistForm.style.display = "none";
+        });
 
-            checklistSuccess.style.display = "block";
-
-        }, 1000);
-
-    });
-
-}
+    }
 
 
-/* ==========================
-   YOVIK Service Waitlist
-========================== */
+    /* ==========================
+       CHECKLIST FORM
+    ========================== */
 
-const waitlistTrigger =
-    document.querySelector(".waitlist-trigger");
+    if (
+        checklistForm &&
+        checklistSubmit &&
+        checklistSuccess
+    ) {
 
-const waitlistOverlay =
-    document.getElementById("waitlistOverlay");
+        checklistForm.addEventListener("submit", function (event) {
 
-const waitlistClose =
-    document.getElementById("waitlistClose");
+            event.preventDefault();
 
+            checklistSubmit.disabled = true;
 
-if (waitlistTrigger && waitlistOverlay && waitlistClose) {
+            checklistSubmit.textContent = "SENDING...";
 
-    waitlistTrigger.addEventListener("click", function (event) {
+            setTimeout(function () {
 
-        event.preventDefault();
+                checklistForm.style.display = "none";
 
-        waitlistOverlay.classList.add("active");
+                checklistSuccess.style.display = "block";
 
-    });
+            }, 1000);
 
-    waitlistClose.addEventListener("click", function () {
+        });
 
-        waitlistOverlay.classList.remove("active");
+    }
 
-    });
-
-    waitlistOverlay.addEventListener("click", function (event) {
-
-        if (event.target === waitlistOverlay) {
-
-            waitlistOverlay.classList.remove("active");
-
-        }
-
-    });
-
-}
+});

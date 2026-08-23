@@ -85,3 +85,101 @@ document.querySelectorAll(".hero-button").forEach((button) => {
     });
 
 });
+
+/* =========================================================
+   YOVIK HOMEPAGE JAVASCRIPT
+   Service Waitlist Popup
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const waitlistTrigger =
+        document.querySelector(".waitlist-trigger");
+
+    const waitlistOverlay =
+        document.getElementById("waitlistOverlay");
+
+    const waitlistClose =
+        document.getElementById("waitlistClose");
+
+    const waitlistForm =
+        document.getElementById("waitlistForm");
+
+
+    /* ==========================
+       OPEN WAITLIST
+    ========================== */
+
+    if (waitlistTrigger && waitlistOverlay) {
+
+        waitlistTrigger.addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            waitlistOverlay.classList.add("active");
+
+        });
+
+    }
+
+
+    /* ==========================
+       CLOSE WAITLIST
+    ========================== */
+
+    if (waitlistClose && waitlistOverlay) {
+
+        waitlistClose.addEventListener("click", function () {
+
+            waitlistOverlay.classList.remove("active");
+
+        });
+
+    }
+
+
+    /* ==========================
+       CLOSE WHEN CLICKING OUTSIDE
+    ========================== */
+
+    if (waitlistOverlay) {
+
+        waitlistOverlay.addEventListener("click", function (event) {
+
+            if (event.target === waitlistOverlay) {
+
+                waitlistOverlay.classList.remove("active");
+
+            }
+
+        });
+
+    }
+
+
+    /* ==========================
+       WAITLIST FORM
+    ========================== */
+
+    if (waitlistForm) {
+
+        waitlistForm.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            const submitButton =
+                waitlistForm.querySelector("button[type='submit']");
+
+            if (submitButton) {
+
+                submitButton.disabled = true;
+
+                submitButton.textContent = "JOINING...";
+
+            }
+
+        });
+
+    }
+
+});
