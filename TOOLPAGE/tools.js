@@ -1,7 +1,6 @@
 /* =========================================================
    YOVIK TOOLPAGE JAVASCRIPT
-   Business Launch Checklist™
-   Desktop + Mobile
+   Checklist Popup
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -26,112 +25,44 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ==========================
-       OPEN CHECKLIST
-       Desktop + Mobile
+       OPEN / CLOSE CHECKLIST
     ========================== */
 
     if (checklistTrigger && checklistOverlay) {
 
-        function openChecklist(event) {
+        checklistTrigger.addEventListener("click", function (event) {
 
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
+            event.preventDefault();
 
             checklistOverlay.classList.add("active");
 
-        }
-
-
-        /* Desktop mouse click */
-        checklistTrigger.addEventListener(
-            "click",
-            openChecklist
-        );
-
-
-        /* Mobile touch */
-        checklistTrigger.addEventListener(
-            "touchend",
-            openChecklist,
-            { passive: false }
-        );
+        });
 
     }
 
-
-    /* ==========================
-       CLOSE CHECKLIST
-       X Button
-       Desktop + Mobile
-    ========================== */
 
     if (checklistClose && checklistOverlay) {
 
-        function closeChecklist(event) {
-
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
+        checklistClose.addEventListener("click", function () {
 
             checklistOverlay.classList.remove("active");
 
-        }
-
-
-        /* Desktop */
-        checklistClose.addEventListener(
-            "click",
-            closeChecklist
-        );
-
-
-        /* Mobile */
-        checklistClose.addEventListener(
-            "touchend",
-            closeChecklist,
-            { passive: false }
-        );
+        });
 
     }
 
 
-    /* ==========================
-       CLOSE BY CLICKING OUTSIDE
-    ========================== */
-
     if (checklistOverlay) {
 
-        checklistOverlay.addEventListener(
-            "click",
-            function (event) {
+        checklistOverlay.addEventListener("click", function (event) {
 
-                if (event.target === checklistOverlay) {
+            if (event.target === checklistOverlay) {
 
-                    checklistOverlay.classList.remove("active");
-
-                }
+                checklistOverlay.classList.remove("active");
 
             }
-        );
 
-
-        /* Mobile outside tap */
-        checklistOverlay.addEventListener(
-            "touchend",
-            function (event) {
-
-                if (event.target === checklistOverlay) {
-
-                    checklistOverlay.classList.remove("active");
-
-                }
-
-            },
-            { passive: false }
-        );
+        });
 
     }
 
@@ -146,27 +77,23 @@ document.addEventListener("DOMContentLoaded", function () {
         checklistSuccess
     ) {
 
-        checklistForm.addEventListener(
-            "submit",
-            function (event) {
+        checklistForm.addEventListener("submit", function (event) {
 
-                event.preventDefault();
+            event.preventDefault();
 
-                checklistSubmit.disabled = true;
+            checklistSubmit.disabled = true;
 
-                checklistSubmit.textContent = "SENDING...";
+            checklistSubmit.textContent = "SENDING...";
 
+            setTimeout(function () {
 
-                setTimeout(function () {
+                checklistForm.style.display = "none";
 
-                    checklistForm.style.display = "none";
+                checklistSuccess.style.display = "block";
 
-                    checklistSuccess.style.display = "block";
+            }, 1000);
 
-                }, 1000);
-
-            }
-        );
+        });
 
     }
 
