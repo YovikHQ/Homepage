@@ -1,6 +1,6 @@
 /* =========================================================
    YOVIK TOOLPAGE JAVASCRIPT
-   Checklist Popup
+   Checklist Popup + Brevo Submission
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -23,10 +23,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const checklistSuccess =
         document.getElementById("checklistSuccess");
 
+    const brevoFrame =
+        document.querySelector('iframe[name="brevoSubmissionFrame"]');
 
-    /* ==========================
-       OPEN / CLOSE CHECKLIST
-    ========================== */
+
+    /* =====================================================
+       OPEN CHECKLIST
+    ===================================================== */
 
     if (checklistTrigger && checklistOverlay) {
 
@@ -41,6 +44,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    /* =====================================================
+       CLOSE CHECKLIST
+    ===================================================== */
+
     if (checklistClose && checklistOverlay) {
 
         checklistClose.addEventListener("click", function () {
@@ -51,6 +58,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
+
+    /* =====================================================
+       CLOSE WHEN CLICKING OUTSIDE POPUP
+    ===================================================== */
 
     if (checklistOverlay) {
 
@@ -67,35 +78,61 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    /* ==========================
-       CHECKLIST FORM
-    ========================== */
+    /* =====================================================
+       BREVO FORM SUBMISSION
+    ===================================================== */
 
-    if (
-        checklistForm &&
-        checklistSubmit &&
-        checklistSuccess
-    ) {
+    if (checklistForm && checklistSubmit) {
 
-        checklistForm.addEventListener("submit", function (event) {
+        let submissionStarted = false;
 
-            event.preventDefault();
+
+        checklistForm.addEventListener("submit", function () {
+
+            /*
+             * IMPORTANT:
+             * DO NOT use event.preventDefault() here.
+             *
+             * The form must actually submit to Brevo.
+             */
+
+            submissionStarted = true;
 
             checklistSubmit.disabled = true;
 
             checklistSubmit.textContent = "SENDING...";
 
-            setTimeout(function () {
-
-                checklistForm.style.display = "none";
-
-                checklistSuccess.style.display = "block";
-
-            }, 1000);
-
         });
+
+
+        /* =================================================
+           BREVO RESPONSE
+        ================================================= */
+
+        if (brevoFrame) {
+
+            brevoFrame.addEventListener("load", function () {
+
+                if (!submissionStarted) {
+                    return;
+                }
+
+                setTimeout(function () {
+
+                    checklistForm.style.display = "none";
+
+                    if (checklistSuccess) {
+
+                        checklistSuccess.style.display = "block";
+
+                    }
+
+                }, 500);
+
+            });
+
+        }
 
     }
 
 });
-
