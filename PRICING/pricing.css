@@ -417,3 +417,27 @@
 
 }
 
+/* ==========================
+   PRICING WAITLIST CTA
+========================== */
+
+.pricing-cta {
+    background: linear-gradient(
+        90deg,
+        #ff2a2a,
+        #d6a600,
+        #20e060
+    );
+
+    color: #ffffff !important;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+}
+
+.pricing-cta:hover {
+    color: #ffffff !important;
+
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
