@@ -184,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <br>
                         We'll let you know when YOVIK launches.
                         <br><br>
-                        <a href="/TOOLPAGE/" class="waitlist-tools-link">
+                        <a href="/Homepage/TOOLPAGE/" class="waitlist-tools-link">
                             TRY THE FREE TOOLS →
                         </a>
                     </div>
