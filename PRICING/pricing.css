@@ -805,3 +805,151 @@ body {
     }
 
 }
+
+/* =========================================================
+   YOVIK PRICING — LAYOUT FIX
+   Scoped specifically to the membership section
+========================================================= */
+
+.membership-comparison .section-heading {
+    max-width: 760px;
+    margin: 0 auto 55px;
+    text-align: center;
+}
+
+.membership-comparison .section-heading h2 {
+    margin: 0 0 28px;
+
+    font-size: clamp(38px, 6vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -2px;
+}
+
+.membership-comparison .section-heading p {
+    width: 100%;
+    max-width: 680px;
+
+    margin: 0 auto;
+
+    font-size: 17px;
+    line-height: 1.8;
+    letter-spacing: normal;
+
+    color: rgba(255,255,255,0.78);
+}
+
+
+/* =========================================================
+   MEMBERSHIP CARDS — CLEANER SPACING
+========================================================= */
+
+.membership-comparison .comparison-grid {
+    position: relative;
+
+    max-width: 1050px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+}
+
+.membership-comparison .membership-card {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   GREEN / GOLD CARD GLOW
+========================================================= */
+
+.membership-comparison .membership-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,0.5),
+        0 0 30px rgba(80,255,100,0.12);
+}
+
+
+/* =========================================================
+   PAID MEMBERSHIP — STRONGER YOVIK TREATMENT
+========================================================= */
+
+.membership-comparison .member-card {
+    border: 2px solid transparent;
+
+    background:
+        linear-gradient(#080808, #080808) padding-box,
+        linear-gradient(
+            135deg,
+            #20ff67,
+            #ffd34e,
+            #20ff67,
+            #ffd34e
+        ) border-box;
+
+    background-size:
+        100% 100%,
+        300% 300%;
+
+    animation: yovikPaidBorder 7s linear infinite;
+
+    box-shadow:
+        0 0 25px rgba(100,255,80,0.08);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .membership-comparison .section-heading {
+        margin-bottom: 40px;
+    }
+
+    .membership-comparison .section-heading h2 {
+        font-size: clamp(36px, 10vw, 52px);
+        line-height: 1.05;
+    }
+
+    .membership-comparison .section-heading p {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .membership-comparison .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   PAID CARD BORDER ANIMATION
+========================================================= */
+
+@keyframes yovikPaidBorder {
+
+    0% {
+        background-position:
+            0 0,
+            0% 50%;
+    }
+
+    50% {
+        background-position:
+            0 0,
+            100% 50%;
+    }
+
+    100% {
+        background-position:
+            0 0,
+            0% 50%;
+    }
+
+}
+
