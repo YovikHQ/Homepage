@@ -953,3 +953,252 @@ body {
 
 }
 
+/* =========================================================
+   YOVIK PRICING HERO — GREEN / GOLD
+========================================================= */
+
+.pricing-hero {
+    position: relative;
+    overflow: hidden;
+
+    padding: 110px 20px 90px;
+
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(50, 255, 120, 0.10),
+            transparent 45%
+        ),
+        linear-gradient(
+            135deg,
+            #020403 0%,
+            #061b0d 50%,
+            #020403 100%
+        );
+}
+
+
+/* Subtle glow behind the hero */
+
+.pricing-hero::before {
+    content: "";
+
+    position: absolute;
+    width: 500px;
+    height: 500px;
+
+    top: -250px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: rgba(120, 255, 80, 0.08);
+
+    filter: blur(100px);
+
+    pointer-events: none;
+}
+
+
+/* Hero content */
+
+.pricing-hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+
+/* Main headline */
+
+.pricing-hero h1 {
+    margin: 0 auto 24px;
+
+    max-width: 900px;
+
+    font-size: clamp(42px, 7vw, 82px);
+    line-height: 0.95;
+
+    font-weight: 900;
+    letter-spacing: -3px;
+
+    background: linear-gradient(
+        90deg,
+        #ffffff 0%,
+        #d9ffb8 45%,
+        #ffd45a 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* Hero description */
+
+.pricing-hero p {
+    max-width: 700px;
+
+    margin: 0 auto 35px;
+
+    font-size: 18px;
+    line-height: 1.7;
+
+    color: rgba(255, 255, 255, 0.82);
+}
+
+
+/* Price */
+
+.pricing-hero .member-price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+
+    margin: 10px 0 8px;
+
+    font-size: clamp(52px, 7vw, 76px);
+    font-weight: 900;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 0 20px rgba(141, 255, 112, 0.25);
+}
+
+
+/* "/ MONTH" */
+
+.pricing-hero .member-price span {
+    font-size: 17px;
+    font-weight: 800;
+
+    color: #ffd45a;
+
+    letter-spacing: 1px;
+}
+
+
+/* Launching soon text */
+
+.pricing-hero .pricing-note {
+    margin: 0 0 28px;
+
+    font-size: 14px;
+
+    color: #8dff70;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+
+/* =========================================================
+   WAITLIST CTA
+========================================================= */
+
+.pricing-hero .waitlist-trigger {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 15px 30px;
+
+    border: 2px solid #ffd45a;
+    border-radius: 999px;
+
+    background: linear-gradient(
+        135deg,
+        #ffd45a,
+        #8dff70
+    );
+
+    color: #050805;
+
+    font-size: 13px;
+    font-weight: 900;
+
+    letter-spacing: 1.5px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 0 20px rgba(141, 255, 112, 0.20),
+        0 0 35px rgba(255, 212, 90, 0.12);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+
+/* Shimmer */
+
+.pricing-hero .waitlist-trigger::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 80%;
+    height: 100%;
+
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255,255,255,0.75),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    transition: left 0.6s ease;
+
+    pointer-events: none;
+}
+
+
+.pricing-hero .waitlist-trigger:hover::before {
+    left: 140%;
+}
+
+
+.pricing-hero .waitlist-trigger:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 0 25px rgba(141, 255, 112, 0.40),
+        0 0 50px rgba(255, 212, 90, 0.25);
+}
+
+
+.pricing-hero .waitlist-trigger:active {
+    transform: translateY(0);
+}
+
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .pricing-hero {
+        padding: 80px 20px 70px;
+    }
+
+    .pricing-hero h1 {
+        letter-spacing: -2px;
+    }
+
+    .pricing-hero p {
+        font-size: 16px;
+    }
+
+}
