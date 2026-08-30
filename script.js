@@ -88,7 +88,7 @@ document.querySelectorAll(".hero-button").forEach((button) => {
 
 /* =========================================================
    YOVIK HOMEPAGE JAVASCRIPT
-   Service Waitlist Popup
+   Service Waitlist Popup + Brevo
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -104,6 +104,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const waitlistForm =
         document.getElementById("waitlistForm");
+
+    const waitlistSubmit =
+        document.getElementById("waitlistSubmit");
 
 
     /* ==========================
@@ -159,22 +162,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ==========================
        WAITLIST FORM
+       Brevo handles submission
     ========================== */
 
     if (waitlistForm) {
 
-        waitlistForm.addEventListener("submit", function (event) {
+        waitlistForm.addEventListener("submit", function () {
 
-            event.preventDefault();
+            /*
+             * IMPORTANT:
+             * Do NOT use event.preventDefault().
+             * The form must be allowed to submit to Brevo.
+             */
 
-            const submitButton =
-                waitlistForm.querySelector("button[type='submit']");
+            if (waitlistSubmit) {
 
-            if (submitButton) {
+                waitlistSubmit.disabled = true;
 
-                submitButton.disabled = true;
-
-                submitButton.textContent = "JOINING...";
+                waitlistSubmit.textContent = "JOINING...";
 
             }
 
