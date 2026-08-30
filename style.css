@@ -1391,33 +1391,37 @@ section{
    Waitlist Tools CTA
 ========================== */
 
-.waitlist-tools-link {
+.waitlist-tools-link,
+.waitlist-tools-link:visited {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     box-sizing: border-box;
+
     padding: 14px 20px;
     margin-top: 18px;
 
-    border: 2px solid currentColor;
+    border: 2px solid #C9A227;
     border-radius: 8px;
+
+    background: transparent;
+    color: #C9A227;
 
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 0.5px;
     text-decoration: none;
 
-    transition:
-        transform 0.2s ease,
-        background-color 0.2s ease,
-        color 0.2s ease;
+    transition: all 0.2s ease;
 }
 
-.waitlist-tools-link:hover {
+.waitlist-tools-link:hover,
+.waitlist-tools-link:focus {
+    background: #C9A227;
+    color: #111111;
+    text-decoration: none;
     transform: translateY(-2px);
-    background-color: currentColor;
-    color: white;
 }
 
 .waitlist-tools-link:active {
