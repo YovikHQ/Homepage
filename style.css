@@ -1386,3 +1386,41 @@ section{
     font-size: 16px;
     cursor: pointer;
 }
+
+/* ==========================
+   Waitlist Tools CTA
+========================== */
+
+.waitlist-tools-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 20px;
+    margin-top: 18px;
+
+    border: 2px solid currentColor;
+    border-radius: 8px;
+
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.waitlist-tools-link:hover {
+    transform: translateY(-2px);
+    background-color: currentColor;
+    color: white;
+}
+
+.waitlist-tools-link:active {
+    transform: translateY(0);
+}
+
