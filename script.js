@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ==========================
-       CLOSE WHEN CLICKING OUTSIDE
+       CLOSE OUTSIDE POPUP
     ========================== */
 
     if (waitlistOverlay) {
@@ -162,26 +162,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* ==========================
        WAITLIST FORM
-       Brevo handles submission
     ========================== */
 
     if (waitlistForm) {
 
         waitlistForm.addEventListener("submit", function () {
 
-            /*
-             * IMPORTANT:
-             * Do NOT use event.preventDefault().
-             * The form must be allowed to submit to Brevo.
-             */
-
             if (waitlistSubmit) {
 
                 waitlistSubmit.disabled = true;
 
-                waitlistSubmit.textContent = "JOINING...";
+                waitlistSubmit.textContent = "JOINED ✓";
 
             }
+
+            setTimeout(function () {
+
+                waitlistForm.innerHTML = `
+                    <div class="waitlist-success">
+                        <strong>You're on the list!</strong>
+                        <br>
+                        We'll let you know when YOVIK launches.
+                        <br><br>
+                        <a href="/TOOLPAGE/" class="waitlist-tools-link">
+                            TRY THE FREE TOOLS →
+                        </a>
+                    </div>
+                `;
+
+            }, 800);
 
         });
 
