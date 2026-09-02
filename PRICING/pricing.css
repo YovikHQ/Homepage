@@ -1202,3 +1202,121 @@ body {
     }
 
 }
+
+/* =========================================================
+   PRICING PAGE FINAL POLISH
+========================================================= */
+
+
+/* ==========================
+   HERO BODY TEXT
+========================== */
+
+.pricing-hero > p {
+    max-width: 700px;
+    margin: 0 auto 28px;
+
+    font-size: 18px;
+    line-height: 1.7;
+    font-weight: 600;
+
+    letter-spacing: 0;
+}
+
+
+/* ==========================
+   YOVIK SHOP INTRO
+========================== */
+
+.yovik-shop .shop-intro {
+    display: block;
+
+    max-width: 650px;
+    margin: 0 auto;
+
+    font-size: 17px;
+    line-height: 1.7;
+    font-weight: 500;
+
+    letter-spacing: 0;
+}
+
+
+/* ==========================
+   JOIN THE WAITLIST BUTTON
+========================== */
+
+.waitlist-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 8px;
+    padding: 14px 28px;
+
+    border: 2px solid #00c853;
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #00c853,
+        #ffd45a
+    );
+
+    color: #07120b;
+
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    text-decoration: none;
+
+    box-shadow:
+        0 0 18px rgba(0, 200, 83, 0.25),
+        0 0 30px rgba(255, 212, 90, 0.12);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+
+/* Hover effect */
+
+.waitlist-trigger:hover {
+    transform: translateY(-3px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 0 24px rgba(0, 200, 83, 0.45),
+        0 0 42px rgba(255, 212, 90, 0.25);
+}
+
+
+/* Click effect */
+
+.waitlist-trigger:active {
+    transform: translateY(0);
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 700px) {
+
+    .pricing-hero > p {
+        max-width: 90%;
+        font-size: 16px;
+    }
+
+    .yovik-shop .shop-intro {
+        max-width: 90%;
+        font-size: 16px;
+    }
+
+}
+
