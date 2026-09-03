@@ -346,10 +346,6 @@ function calculate() {
 }
 
 
-// ==============================
-// LAUNCH SCORE
-// ==============================
-
 function updatePotential(
     startup,
     dailyProfit,
@@ -362,54 +358,72 @@ function updatePotential(
 
 
     // ==========================
-    // STARTUP EFFICIENCY
-    // 0–25 POINTS
+    // PROFIT — 50 POINTS
     // ==========================
 
-    let startupScore = 0;
+    let profitScore = 0;
 
-    if (startup > 0 && dailyProfit > 0) {
+    if (yearlyProfit > 0) {
+
+        profitScore = Math.min(
+            50,
+            yearlyProfit / 2000
+        );
+
+    }
+
+    score += profitScore;
+
+
+    // ==========================
+    // STARTUP PAYBACK — 25 POINTS
+    // ==========================
+
+    let paybackScore = 0;
+
+    if (startup === 0 && dailyProfit > 0) {
+
+        paybackScore = 25;
+
+    } else if (startup > 0 && dailyProfit > 0) {
 
         const paybackDays =
             startup / dailyProfit;
 
-        startupScore = Math.max(
-            0,
-            25 - (paybackDays / 4)
-        );
 
-    } else if (startup === 0 && dailyProfit > 0) {
+        if (paybackDays <= 90) {
 
-        startupScore = 25;
+            paybackScore =
+                25 - (paybackDays / 90 * 5);
 
-    }
+        } else if (paybackDays <= 180) {
 
+            paybackScore =
+                20 - ((paybackDays - 90) / 90 * 5);
 
-    score += startupScore;
+        } else if (paybackDays <= 365) {
 
+            paybackScore =
+                15 - ((paybackDays - 180) / 185 * 7.5);
 
-    // ==========================
-    // ANNUAL PROFIT
-    // 0–40 POINTS
-    // ==========================
+        } else if (paybackDays <= 730) {
 
-    let annualScore = 0;
+            paybackScore =
+                7.5 - ((paybackDays - 365) / 365 * 7.5);
 
-    if (yearlyProfit > 0) {
+        } else {
 
-        annualScore = Math.min(
-            40,
-            yearlyProfit / 5000
-        );
+            paybackScore = 0;
+
+        }
 
     }
 
-    score += annualScore;
+    score += Math.max(0, paybackScore);
 
 
     // ==========================
-    // PROFIT MARGIN
-    // 0–35 POINTS
+    // PROFIT MARGIN — 25 POINTS
     // ==========================
 
     let marginScore = 0;
@@ -417,7 +431,7 @@ function updatePotential(
     if (profitMargin > 0) {
 
         marginScore = Math.min(
-            35,
+            25,
             profitMargin * 50
         );
 
@@ -427,33 +441,21 @@ function updatePotential(
 
 
     // ==========================
-    // LIMIT RAW SCORE
+    // FINAL SCORE
     // ==========================
 
-    if (score > 100) {
-        score = 100;
-    }
+    score = Math.max(
+        0,
+        Math.min(100, score)
+    );
+
+
+    const displayScore =
+        Math.round(score);
 
 
     // ==========================
     // DISPLAY SCORE
-    // 60–100%
-    // ==========================
-
-    let displayScore =
-        60 + (score * 0.40);
-
-
-    displayScore =
-        Math.min(100, displayScore);
-
-
-    displayScore =
-        Math.round(displayScore);
-
-
-    // ==========================
-    // DISPLAY
     // ==========================
 
     potentialPercent.textContent =
@@ -467,30 +469,35 @@ function updatePotential(
     // SCORE MESSAGE
     // ==========================
 
-    if (displayScore >= 100) {
+    if (displayScore >= 90) {
 
         potentialText.textContent =
-            "🏆 Launch Ready — Your business fundamentals are exceptional.";
-
-    } else if (displayScore >= 90) {
-
-        potentialText.textContent =
-            "🚀 Exceptional Opportunity — You're very close to an outstanding launch.";
+            "🏆 Exceptional Opportunity — Your business fundamentals are very strong.";
 
     } else if (displayScore >= 80) {
 
         potentialText.textContent =
-            "✅ Strong Opportunity — Your business has a solid foundation.";
+            "🚀 Strong Opportunity — Your business has a solid foundation.";
 
     } else if (displayScore >= 70) {
 
         potentialText.textContent =
-            "📈 Promising Opportunity — A few improvements could significantly strengthen your business.";
+            "✅ Viable Opportunity — Your numbers show a reasonably sound business model.";
+
+    } else if (displayScore >= 60) {
+
+        potentialText.textContent =
+            "📈 Needs Improvement — Your business may work, but some numbers should be strengthened.";
+
+    } else if (displayScore >= 40) {
+
+        potentialText.textContent =
+            "⚠️ High Risk — Your current numbers have some significant weaknesses.";
 
     } else {
 
         potentialText.textContent =
-            "🛠️ Building Momentum — Keep refining your numbers. Every improvement moves you closer to a stronger launch.";
+            "🛑 Poor Outlook — Your current numbers suggest the business model needs significant improvement.";
 
     }
 
