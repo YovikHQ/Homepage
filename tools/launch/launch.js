@@ -367,7 +367,7 @@ function updatePotential(
 
         profitScore = Math.min(
             50,
-            yearlyProfit / 2000
+            yearlyProfit / 1750
         );
 
     }
