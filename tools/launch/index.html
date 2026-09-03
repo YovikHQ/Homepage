@@ -133,32 +133,186 @@ Start Planning
 <div class="card">
 
     <h2>Revenue Estimates</h2>
+
     <div class="input-group">
 
-    <label>Days Per Week You'll Operate</label>
+        <label>Days Per Week You'll Operate</label>
 
-    <input
-        id="daysPerWeek"
-        type="number"
-        min="1"
-        max="7"
-        value="5">
+        <input
+            id="daysPerWeek"
+            type="number"
+            min="1"
+            max="7"
+            placeholder="e.g. 5">
+
+    </div>
+
+    <div class="input-group">
+
+        <label>Average Sales Per Day</label>
+
+        <input
+            id="salesPerDay"
+            type="number"
+            min="0"
+            placeholder="e.g. 50">
+
+    </div>
+
+    <div class="input-group">
+
+        <label>Average Price Per Sale ($)</label>
+
+        <input
+            id="pricePerSale"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="e.g. 7.00">
+
+    </div>
+
+    <div class="input-group">
+
+        <label>Average Cost Per Sale ($)</label>
+
+        <input
+            id="costPerSale"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="e.g. 2.00">
+
+    </div>
 
 </div>
+<div class="card">
+
+    <h2>Recurring Costs</h2>
+
+    <p>
+        Enter the costs your business expects to pay while operating.
+    </p>
+
+    <h3>Weekly Costs</h3>
 
     <div class="input-group">
-        <label>Average Sales Per Day</label>
-        <input id="salesPerDay" type="number" placeholder="50">
+
+        <label>Inventory / Ingredients</label>
+
+        <input
+            id="weeklyInventory"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="e.g. 150">
+
     </div>
 
     <div class="input-group">
-        <label>Average Price Per Sale ($)</label>
-        <input id="pricePerSale" type="number" step="0.01" placeholder="7.00">
+
+        <label>Packaging</label>
+
+        <input
+            id="weeklyPackaging"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="e.g. 25">
+
     </div>
 
     <div class="input-group">
-        <label>Average Cost Per Sale ($)</label>
-        <input id="costPerSale" type="number" step="0.01" placeholder="2.00">
+
+        <label>Fuel / Transportation</label>
+
+        <input
+            id="weeklyFuel"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="e.g. 40">
+
+    </div>
+
+    <div class="input-group">
+
+        <label>Other Weekly Costs</label>
+
+        <input
+            id="weeklyOther"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="e.g. 25">
+
+    </div>
+
+    <h3>Monthly Costs</h3>
+
+    <div class="input-group">
+
+        <label>Insurance</label>
+
+        <input
+            id="monthlyInsurance"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="e.g. 75">
+
+    </div>
+
+    <div class="input-group">
+
+        <label>Phone / Internet</label>
+
+        <input
+            id="monthlyPhone"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="e.g. 50">
+
+    </div>
+
+    <div class="input-group">
+
+        <label>Commissary / Storage</label>
+
+        <input
+            id="monthlyStorage"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="e.g. 100">
+
+    </div>
+
+    <div class="input-group">
+
+        <label>Software / Subscriptions</label>
+
+        <input
+            id="monthlySoftware"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="e.g. 30">
+
+    </div>
+
+    <div class="input-group">
+
+        <label>Other Monthly Costs</label>
+
+        <input
+            id="monthlyOther"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="e.g. 50">
+
     </div>
 
 </div>
