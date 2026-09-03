@@ -2,6 +2,11 @@
 // YOVIK Launch Calculator
 // ==============================
 
+
+// ==============================
+// INPUTS
+// ==============================
+
 const ids = [
     "equipment",
     "license",
@@ -10,47 +15,146 @@ const ids = [
     "daysPerWeek",
     "salesPerDay",
     "pricePerSale",
-    "costPerSale"
+    "costPerSale",
+
+    // Weekly recurring costs
+    "weeklyInventory",
+    "weeklyPackaging",
+    "weeklyFuel",
+    "weeklyOther",
+
+    // Monthly recurring costs
+    "monthlyInsurance",
+    "monthlyPhone",
+    "monthlyStorage",
+    "monthlySoftware",
+    "monthlyOther"
 ];
 
 const inputs = {};
 
 ids.forEach(id => {
+
     inputs[id] = document.getElementById(id);
 
     if (inputs[id]) {
+
         inputs[id].addEventListener("input", calculate);
+
     }
+
 });
 
-const startupTotal = document.getElementById("startupTotal");
-const dailyProfit = document.getElementById("dailyProfit");
-const weeklyProfit = document.getElementById("weeklyProfit");
-const monthlyProfit = document.getElementById("monthlyProfit");
-const annualProfit = document.getElementById("annualProfit");
-const payback = document.getElementById("payback");
 
-const potentialPercent = document.getElementById("potentialPercent");
-const progressFill = document.getElementById("progressFill");
-const potentialText = document.getElementById("potentialText");
+// ==============================
+// OUTPUT ELEMENTS
+// ==============================
 
-const businessButtons = document.querySelectorAll(".business-card");
+const startupTotal =
+    document.getElementById("startupTotal");
+
+const dailyProfit =
+    document.getElementById("dailyProfit");
+
+const weeklyProfit =
+    document.getElementById("weeklyProfit");
+
+const monthlyProfit =
+    document.getElementById("monthlyProfit");
+
+const annualProfit =
+    document.getElementById("annualProfit");
+
+const payback =
+    document.getElementById("payback");
+
+const potentialPercent =
+    document.getElementById("potentialPercent");
+
+const progressFill =
+    document.getElementById("progressFill");
+
+const potentialText =
+    document.getElementById("potentialText");
+
+const businessButtons =
+    document.querySelectorAll(".business-card");
+
+
+// ==============================
+// BUSINESS TYPE
+// ==============================
 
 console.log("Found buttons:", businessButtons.length);
 
 let selectedBusiness = "other";
 
+
+// ==============================
+// GET INPUT VALUE
+// ==============================
+
 function value(id) {
+
+    if (!inputs[id]) {
+        return 0;
+    }
+
     return Number(inputs[id].value) || 0;
+
 }
+
+
+// ==============================
+// CHECK REQUIRED INPUTS
+// ==============================
+
+function hasRequiredInputs() {
+
+    const required = [
+        "daysPerWeek",
+        "salesPerDay",
+        "pricePerSale",
+        "costPerSale"
+    ];
+
+    return required.every(id => {
+
+        return (
+            inputs[id] &&
+            inputs[id].value.trim() !== ""
+        );
+
+    });
+
+}
+
+
+// ==============================
+// FORMAT MONEY
+// ==============================
 
 function money(amount) {
+
     return "$" + amount.toLocaleString(undefined, {
+
         maximumFractionDigits: 0
+
     });
+
 }
 
+
+// ==============================
+// CALCULATE
+// ==============================
+
 function calculate() {
+
+
+    // ==========================
+    // STARTUP COSTS
+    // ==========================
 
     const startup =
         value("equipment") +
@@ -58,59 +162,194 @@ function calculate() {
         value("inventory") +
         value("misc");
 
-    const profitPerSale =
-        value("pricePerSale") -
+
+    // ==========================
+    // REVENUE / COST PER SALE
+    // ==========================
+
+    const sales =
+        value("salesPerDay");
+
+    const price =
+        value("pricePerSale");
+
+    const cost =
         value("costPerSale");
 
+    const daysPerWeek =
+        value("daysPerWeek");
+
+
+    const profitPerSale =
+        price - cost;
+
+
     const profitMargin =
-        value("pricePerSale") > 0
-            ? profitPerSale / value("pricePerSale")
-            : 0;    
+        price > 0
+            ? profitPerSale / price
+            : 0;
 
-    const daily =
-        value("salesPerDay") *
-        profitPerSale;
 
-    const weekly =
-        daily * value("daysPerWeek");
+    // ==========================
+    // GROSS PROFIT
+    // ==========================
 
-    const yearly =
-        weekly * 52;
+    const grossDaily =
+        sales * profitPerSale;
 
-    const monthly =
-        yearly / 12;
 
-    startupTotal.textContent = money(startup);
-    dailyProfit.textContent = money(daily);
-    weeklyProfit.textContent = money(weekly);
-    monthlyProfit.textContent = money(monthly);
-    annualProfit.textContent = money(yearly);
+    const grossWeekly =
+        grossDaily * daysPerWeek;
 
-    if (daily > 0) {
+
+    const grossAnnual =
+        grossWeekly * 52;
+
+
+    // ==========================
+    // WEEKLY RECURRING COSTS
+    // ==========================
+
+    const weeklyRecurring =
+        value("weeklyInventory") +
+        value("weeklyPackaging") +
+        value("weeklyFuel") +
+        value("weeklyOther");
+
+
+    // ==========================
+    // MONTHLY RECURRING COSTS
+    // ==========================
+
+    const monthlyRecurring =
+        value("monthlyInsurance") +
+        value("monthlyPhone") +
+        value("monthlyStorage") +
+        value("monthlySoftware") +
+        value("monthlyOther");
+
+
+    // ==========================
+    // CONVERT MONTHLY COSTS
+    // TO ANNUAL COST
+    // ==========================
+
+    const annualRecurringMonthlyCosts =
+        monthlyRecurring * 12;
+
+
+    // ==========================
+    // NET OPERATING PROFIT
+    // ==========================
+
+    const annualNetProfit =
+        grossAnnual -
+        (weeklyRecurring * 52) -
+        annualRecurringMonthlyCosts;
+
+
+    const monthlyNetProfit =
+        annualNetProfit / 12;
+
+
+    const weeklyNetProfit =
+        annualNetProfit / 52;
+
+
+    const dailyNetProfit =
+        daysPerWeek > 0
+            ? weeklyNetProfit / daysPerWeek
+            : 0;
+
+
+    // ==========================
+    // STARTUP INVESTMENT
+    // ==========================
+
+    startupTotal.textContent =
+        money(startup);
+
+
+    // ==========================
+    // INCOMPLETE CALCULATOR
+    // ==========================
+
+    if (!hasRequiredInputs()) {
+
+        dailyProfit.textContent = "--";
+        weeklyProfit.textContent = "--";
+        monthlyProfit.textContent = "--";
+        annualProfit.textContent = "--";
+        payback.textContent = "--";
+
+        potentialPercent.textContent = "--";
+
+        progressFill.style.width = "0%";
+
+        potentialText.textContent =
+            "Enter your numbers to calculate your Launch Score™";
+
+        return;
+
+    }
+
+
+    // ==========================
+    // DISPLAY PROFITS
+    // ==========================
+
+    dailyProfit.textContent =
+        money(dailyNetProfit);
+
+    weeklyProfit.textContent =
+        money(weeklyNetProfit);
+
+    monthlyProfit.textContent =
+        money(monthlyNetProfit);
+
+    annualProfit.textContent =
+        money(annualNetProfit);
+
+
+    // ==========================
+    // PAYBACK PERIOD
+    // ==========================
+
+    if (dailyNetProfit > 0) {
 
         const days =
-            Math.ceil(startup / daily);
+            Math.ceil(startup / dailyNetProfit);
 
         payback.textContent =
             days + " Days";
 
     } else {
 
-        payback.textContent = "--";
+        payback.textContent =
+            "Not Profitable";
 
     }
 
+
+    // ==========================
+    // LAUNCH SCORE
+    // ==========================
+
     updatePotential(
         startup,
-        daily,
-        yearly,
+        dailyNetProfit,
+        annualNetProfit,
         profitPerSale,
         profitMargin
     );
 
 }
 
-calculate();
+
+// ==============================
+// LAUNCH SCORE
+// ==============================
+
 function updatePotential(
     startup,
     dailyProfit,
@@ -121,24 +360,38 @@ function updatePotential(
 
     let score = 0;
 
-    // Startup Efficiency (0–25 points)
 
-    let startupScore = 25;
+    // ==========================
+    // STARTUP EFFICIENCY
+    // 0–25 POINTS
+    // ==========================
+
+    let startupScore = 0;
 
     if (startup > 0 && dailyProfit > 0) {
 
-        const paybackDays = startup / dailyProfit;
+        const paybackDays =
+            startup / dailyProfit;
 
         startupScore = Math.max(
             0,
             25 - (paybackDays / 4)
-    );
+        );
 
-}
+    } else if (startup === 0 && dailyProfit > 0) {
+
+        startupScore = 25;
+
+    }
+
 
     score += startupScore;
 
-    // Annual Profit Score (0–40 points)
+
+    // ==========================
+    // ANNUAL PROFIT
+    // 0–40 POINTS
+    // ==========================
 
     let annualScore = 0;
 
@@ -153,7 +406,11 @@ function updatePotential(
 
     score += annualScore;
 
-    // Profit Margin (0–35 points)
+
+    // ==========================
+    // PROFIT MARGIN
+    // 0–35 POINTS
+    // ==========================
 
     let marginScore = 0;
 
@@ -168,67 +425,108 @@ function updatePotential(
 
     score += marginScore;
 
-    if (score > 100) score = 100;
 
-    // Convert raw score (0–100) into displayed score (60–100)
-    let displayScore = 60 + (score * 0.40);
+    // ==========================
+    // LIMIT RAW SCORE
+    // ==========================
 
-    // Never exceed 100%
-    displayScore = Math.min(100, displayScore);
+    if (score > 100) {
+        score = 100;
+    }
 
-    // Round to a whole number
-    displayScore = Math.round(displayScore);
 
-    potentialPercent.textContent = displayScore + "%";
-    progressFill.style.width = displayScore + "%";
+    // ==========================
+    // DISPLAY SCORE
+    // 60–100%
+    // ==========================
+
+    let displayScore =
+        60 + (score * 0.40);
+
+
+    displayScore =
+        Math.min(100, displayScore);
+
+
+    displayScore =
+        Math.round(displayScore);
+
+
+    // ==========================
+    // DISPLAY
+    // ==========================
+
+    potentialPercent.textContent =
+        displayScore + "%";
+
+    progressFill.style.width =
+        displayScore + "%";
+
+
+    // ==========================
+    // SCORE MESSAGE
+    // ==========================
 
     if (displayScore >= 100) {
 
         potentialText.textContent =
-            "🏆 Launch Ready — Your business fundamentals are exceptional."
+            "🏆 Launch Ready — Your business fundamentals are exceptional.";
 
     } else if (displayScore >= 90) {
 
         potentialText.textContent =
-            "🚀 Exceptional Opportunity — You're very close to an outstanding launch."
+            "🚀 Exceptional Opportunity — You're very close to an outstanding launch.";
 
     } else if (displayScore >= 80) {
 
         potentialText.textContent =
-            "✅ Strong Opportunity — Your business has a solid foundation."
+            "✅ Strong Opportunity — Your business has a solid foundation.";
 
     } else if (displayScore >= 70) {
 
         potentialText.textContent =
-            "📈 Promising Opportunity — A few improvements could significantly strengthen your business."
+            "📈 Promising Opportunity — A few improvements could significantly strengthen your business.";
 
     } else {
 
         potentialText.textContent =
-            "🛠️ Building Momentum — Keep refining your numbers. Every improvement moves you closer to a stronger launch."
+            "🛠️ Building Momentum — Keep refining your numbers. Every improvement moves you closer to a stronger launch.";
 
     }
 
 }
 
+
+// ==============================
+// BUSINESS BUTTONS
+// ==============================
+
 businessButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
-        // Remove the active class from all buttons
         businessButtons.forEach(btn =>
             btn.classList.remove("active")
         );
 
-        // Highlight the clicked button
         button.classList.add("active");
 
-        // Save the selected business
-        selectedBusiness = button.dataset.business;
+        selectedBusiness =
+            button.dataset.business;
 
-        // For testing
-        console.log("Selected:", selectedBusiness);
+        console.log(
+            "Selected:",
+            selectedBusiness
+        );
 
     });
 
 });
+
+
+// ==============================
+// INITIAL CALCULATION
+// ==============================
+
+calculate();
+
