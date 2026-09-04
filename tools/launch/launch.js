@@ -132,6 +132,48 @@ function calculate() {
         value("inventory") +
         value("misc");
 
+
+    /*
+        Do not show a Launch Score until the
+        core revenue inputs have been entered.
+    */
+
+    if (!hasRequiredInputs()) {
+
+        potentialPercent.textContent = "—";
+
+        progressFill.style.width = "0%";
+
+        potentialText.textContent =
+            "Enter your numbers to calculate your Launch Score™";
+
+        /*
+            Startup costs can still be displayed
+            even before the score is calculated.
+        */
+
+        startupTotal.textContent =
+            money(startup);
+
+        dailyProfit.textContent =
+            "$0";
+
+        weeklyProfit.textContent =
+            "$0";
+
+        monthlyProfit.textContent =
+            "$0";
+
+        annualProfit.textContent =
+            "$0";
+
+        payback.textContent =
+            "--";
+
+        return;
+    }
+
+
     const sales = value("salesPerDay");
     const price = value("pricePerSale");
     const cost = value("costPerSale");
@@ -148,7 +190,8 @@ function calculate() {
         - Other direct sale costs
     */
 
-    const profitPerSale = price - cost;
+    const profitPerSale =
+        price - cost;
 
     const profitMargin =
         price > 0
@@ -265,7 +308,6 @@ function calculate() {
     );
 
 }
-
 
 /* =========================================================
    LAUNCH SCORE
