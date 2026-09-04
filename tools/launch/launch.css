@@ -148,7 +148,7 @@ main{
 
 .snapshot{
     position:sticky;
-    top:30px;
+    top: 0;
 }
 
 .snapshot-card{
@@ -556,6 +556,7 @@ body {
 
 .workspace {
     position: relative;
+    align-items: flex-start;
 }
 
 
