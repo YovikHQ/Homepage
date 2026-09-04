@@ -31,7 +31,9 @@ const ids = [
     "monthlyOther"
 ];
 
+
 const inputs = {};
+
 
 ids.forEach(id => {
 
@@ -315,13 +317,18 @@ function calculate() {
     // PAYBACK PERIOD
     // ==========================
 
-    if (dailyNetProfit > 0) {
+    if (startup === 0 && dailyNetProfit > 0) {
+
+        payback.textContent =
+            "Already Recovered";
+
+    } else if (startup > 0 && dailyNetProfit > 0) {
 
         const days =
             Math.ceil(startup / dailyNetProfit);
 
         payback.textContent =
-            days + " Days";
+            days + " Operating Days";
 
     } else {
 
@@ -339,51 +346,380 @@ function calculate() {
         startup,
         dailyNetProfit,
         annualNetProfit,
-        profitPerSale,
-        profitMargin
+        profitMargin,
+        daysPerWeek
     );
 
 }
 
 
+// ==============================
+// YOVIK LAUNCH SCORE
+// ==============================
+
 function updatePotential(
     startup,
     dailyProfit,
     yearlyProfit,
-    profitPerSale,
-    profitMargin
+    profitMargin,
+    daysPerWeek
 ) {
 
     let score = 0;
 
 
-    // ==========================
-    // PROFIT — 50 POINTS
-    // ==========================
+    /*
+        YOVIK automatically determines
+        the scoring model from the number
+        of operating days entered.
 
-    let profitScore = 0;
+        1–2 days  = Side Hustle
+        3–4 days  = Growth Business
+        5–7 days  = Full-Time Business
+    */
 
-    if (yearlyProfit > 0) {
 
-        profitScore = Math.min(
-            50,
-            yearlyProfit / 1750
-        );
+    // ==============================
+    // SIDE HUSTLE — 1–2 DAYS
+    // ==============================
+
+    if (daysPerWeek <= 2) {
+
+
+        // Annual Profit — 30 points
+
+        const profitScore =
+            yearlyProfit > 0
+                ? Math.min(
+                    30,
+                    yearlyProfit / 2500
+                )
+                : 0;
+
+
+        // Profit Per Operating Day — 35 points
+
+        const dailyEfficiencyScore =
+            Math.min(
+                35,
+                Math.max(0, dailyProfit) / 8
+            );
+
+
+        // Startup Payback — 20 points
+
+        let paybackScore = 0;
+
+
+        if (startup === 0 && dailyProfit > 0) {
+
+            paybackScore = 20;
+
+        } else if (startup > 0 && dailyProfit > 0) {
+
+            const paybackDays =
+                startup / dailyProfit;
+
+
+            if (paybackDays <= 30) {
+
+                paybackScore = 20;
+
+            } else if (paybackDays <= 90) {
+
+                paybackScore = 17;
+
+            } else if (paybackDays <= 180) {
+
+                paybackScore = 13;
+
+            } else if (paybackDays <= 365) {
+
+                paybackScore = 8;
+
+            } else if (paybackDays <= 730) {
+
+                paybackScore = 4;
+
+            }
+
+        }
+
+
+        // Profit Margin — 15 points
+
+        const marginScore =
+            Math.min(
+                15,
+                Math.max(0, profitMargin) * 30
+            );
+
+
+        score =
+            profitScore +
+            dailyEfficiencyScore +
+            paybackScore +
+            marginScore;
 
     }
 
-    score += profitScore;
+
+    // ==============================
+    // GROWTH BUSINESS — 3–4 DAYS
+    // ==============================
+
+    else if (daysPerWeek <= 4) {
 
 
-    // ==========================
-    // STARTUP PAYBACK — 25 POINTS
-    // ==========================
+        // Annual Profit — 40 points
 
-    let paybackScore = 0;
+        const profitScore =
+            yearlyProfit > 0
+                ? Math.min(
+                    40,
+                    yearlyProfit / 2500
+                )
+                : 0;
 
-    if (startup === 0 && dailyProfit > 0) {
 
-        paybackScore = 25;
+        // Profit Per Operating Day — 20 points
+
+        const dailyEfficiencyScore =
+            Math.min(
+                20,
+                Math.max(0, dailyProfit) / 10
+            );
+
+
+        // Startup Payback — 20 points
+
+        let paybackScore = 0;
+
+
+        if (startup === 0 && dailyProfit > 0) {
+
+            paybackScore = 20;
+
+        } else if (startup > 0 && dailyProfit > 0) {
+
+            const paybackDays =
+                startup / dailyProfit;
+
+
+            if (paybackDays <= 30) {
+
+                paybackScore = 20;
+
+            } else if (paybackDays <= 90) {
+
+                paybackScore = 17;
+
+            } else if (paybackDays <= 180) {
+
+                paybackScore = 13;
+
+            } else if (paybackDays <= 365) {
+
+                paybackScore = 8;
+
+            } else if (paybackDays <= 730) {
+
+                paybackScore = 4;
+
+            }
+
+        }
+
+
+        // Profit Margin — 20 points
+
+        const marginScore =
+            Math.min(
+                20,
+                Math.max(0, profitMargin) * 40
+            );
+
+
+        score =
+            profitScore +
+            dailyEfficiencyScore +
+            paybackScore +
+            marginScore;
+
+    }
+
+
+    // ==============================
+    // FULL-TIME BUSINESS — 5–7 DAYS
+    // ==============================
+
+    else {
+
+
+        // Annual Profit — 50 points
+
+        const profitScore =
+            yearlyProfit > 0
+                ? Math.min(
+                    50,
+                    yearlyProfit / 1750
+                )
+                : 0;
+
+
+        // Startup Payback — 25 points
+
+        let paybackScore = 0;
+
+
+        if (startup === 0 && dailyProfit > 0) {
+
+            paybackScore = 25;
+
+        } else if (startup > 0 && dailyProfit > 0) {
+
+            const paybackDays =
+                startup / dailyProfit;
+
+
+            if (paybackDays <= 90) {
+
+                paybackScore =
+                    25 -
+                    (paybackDays / 90 * 5);
+
+            } else if (paybackDays <= 180) {
+
+                paybackScore =
+                    20 -
+                    ((paybackDays - 90) / 90 * 5);
+
+            } else if (paybackDays <= 365) {
+
+                paybackScore =
+                    15 -
+                    ((paybackDays - 180) / 185 * 7.5);
+
+            } else if (paybackDays <= 730) {
+
+                paybackScore =
+                    7.5 -
+                    ((paybackDays - 365) / 365 * 7.5);
+
+            } else {
+
+                paybackScore = 0;
+
+            }
+
+        }
+
+
+        // Profit Margin — 25 points
+
+        const marginScore =
+            Math.min(
+                25,
+                Math.max(0, profitMargin) * 50
+            );
+
+
+        score =
+            profitScore +
+            paybackScore +
+            marginScore;
+
+    }
+
+
+    // ==============================
+    // FINAL SCORE
+    // ==============================
+
+    score =
+        Math.max(
+            0,
+            Math.min(100, score)
+        );
+
+
+    const displayScore =
+        Math.round(score);
+
+
+    // ==============================
+    // DISPLAY SCORE
+    // ==============================
+
+    potentialPercent.textContent =
+        displayScore + "%";
+
+
+    progressFill.style.width =
+        displayScore + "%";
+
+
+    // ==============================
+    // SCORE MESSAGE
+    // ==============================
+
+    let result = "";
+
+
+    if (displayScore >= 90) {
+
+        result =
+            "🏆 Exceptional Opportunity — Your numbers show very strong business fundamentals.";
+
+    } else if (displayScore >= 80) {
+
+        result =
+            "🚀 Strong Opportunity — Your business has a solid financial foundation.";
+
+    } else if (displayScore >= 70) {
+
+        result =
+            "✅ Viable Opportunity — Your numbers show a reasonably sound business model.";
+
+    } else if (displayScore >= 60) {
+
+        result =
+            "📈 Needs Improvement — Your business may work, but some numbers should be strengthened.";
+
+    } else if (displayScore >= 40) {
+
+        result =
+            "⚠️ High Risk — Your current numbers have some significant weaknesses.";
+
+    } else {
+
+        result =
+            "🛑 Poor Outlook — Your current numbers suggest the business model needs significant improvement.";
+
+    }
+
+
+    // ==============================
+    // SCORE EXPLANATION
+    // ==============================
+
+    let explanation = "";
+
+
+    if (yearlyProfit <= 0) {
+
+        explanation =
+            "Your projected net profit is currently too low to support a strong score.";
+
+    } else if (dailyProfit < 50) {
+
+        explanation =
+            "Your biggest opportunity is increasing the profit earned on each operating day.";
+
+    } else if (profitMargin < 0.20) {
+
+        explanation =
+            "Your profit margin is limiting the score. Improving pricing or lowering cost per sale would help.";
 
     } else if (startup > 0 && dailyProfit > 0) {
 
@@ -391,115 +727,33 @@ function updatePotential(
             startup / dailyProfit;
 
 
-        if (paybackDays <= 90) {
+        if (paybackDays > 365) {
 
-            paybackScore =
-                25 - (paybackDays / 90 * 5);
+            explanation =
+                "Your biggest weakness is the time required to recover your startup investment.";
 
-        } else if (paybackDays <= 180) {
+        } else if (yearlyProfit < 25000) {
 
-            paybackScore =
-                20 - ((paybackDays - 90) / 90 * 5);
-
-        } else if (paybackDays <= 365) {
-
-            paybackScore =
-                15 - ((paybackDays - 180) / 185 * 7.5);
-
-        } else if (paybackDays <= 730) {
-
-            paybackScore =
-                7.5 - ((paybackDays - 365) / 365 * 7.5);
+            explanation =
+                "Your margins and payback are reasonable, but increasing sales volume would have the biggest impact.";
 
         } else {
 
-            paybackScore = 0;
+            explanation =
+                "Your profit, margins, and startup payback are working together well.";
 
         }
 
-    }
-
-    score += Math.max(0, paybackScore);
-
-
-    // ==========================
-    // PROFIT MARGIN — 25 POINTS
-    // ==========================
-
-    let marginScore = 0;
-
-    if (profitMargin > 0) {
-
-        marginScore = Math.min(
-            25,
-            profitMargin * 50
-        );
-
-    }
-
-    score += marginScore;
-
-
-    // ==========================
-    // FINAL SCORE
-    // ==========================
-
-    score = Math.max(
-        0,
-        Math.min(100, score)
-    );
-
-
-    const displayScore =
-        Math.round(score);
-
-
-    // ==========================
-    // DISPLAY SCORE
-    // ==========================
-
-    potentialPercent.textContent =
-        displayScore + "%";
-
-    progressFill.style.width =
-        displayScore + "%";
-
-
-    // ==========================
-    // SCORE MESSAGE
-    // ==========================
-
-    if (displayScore >= 90) {
-
-        potentialText.textContent =
-            "🏆 Exceptional Opportunity — Your business fundamentals are very strong.";
-
-    } else if (displayScore >= 80) {
-
-        potentialText.textContent =
-            "🚀 Strong Opportunity — Your business has a solid foundation.";
-
-    } else if (displayScore >= 70) {
-
-        potentialText.textContent =
-            "✅ Viable Opportunity — Your numbers show a reasonably sound business model.";
-
-    } else if (displayScore >= 60) {
-
-        potentialText.textContent =
-            "📈 Needs Improvement — Your business may work, but some numbers should be strengthened.";
-
-    } else if (displayScore >= 40) {
-
-        potentialText.textContent =
-            "⚠️ High Risk — Your current numbers have some significant weaknesses.";
-
     } else {
 
-        potentialText.textContent =
-            "🛑 Poor Outlook — Your current numbers suggest the business model needs significant improvement.";
+        explanation =
+            "Your current numbers provide a useful starting point. Increasing sales or improving margins can strengthen the result.";
 
     }
+
+
+    potentialText.textContent =
+        `${result} ${explanation}`;
 
 }
 
@@ -512,14 +766,18 @@ businessButtons.forEach(button => {
 
     button.addEventListener("click", () => {
 
+
         businessButtons.forEach(btn =>
             btn.classList.remove("active")
         );
 
+
         button.classList.add("active");
+
 
         selectedBusiness =
             button.dataset.business;
+
 
         console.log(
             "Selected:",
@@ -536,4 +794,3 @@ businessButtons.forEach(button => {
 // ==============================
 
 calculate();
-
