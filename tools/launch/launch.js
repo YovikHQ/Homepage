@@ -1,12 +1,3 @@
-// ==============================
-// YOVIK Launch Calculator
-// ==============================
-
-
-// ==============================
-// INPUTS
-// ==============================
-
 const ids = [
     "equipment",
     "license",
@@ -17,13 +8,11 @@ const ids = [
     "pricePerSale",
     "costPerSale",
 
-    // Weekly recurring costs
-    "weeklyInventory",
-    "weeklyPackaging",
+    // Weekly operating costs
     "weeklyFuel",
     "weeklyOther",
 
-    // Monthly recurring costs
+    // Monthly operating costs
     "monthlyInsurance",
     "monthlyPhone",
     "monthlyStorage",
@@ -31,132 +20,111 @@ const ids = [
     "monthlyOther"
 ];
 
-
 const inputs = {};
 
+ids.forEach(id => {
+    inputs[id] = document.getElementById(id);
+});
+
+const startupTotal = document.getElementById("startupTotal");
+const dailyProfit = document.getElementById("dailyProfit");
+const weeklyProfit = document.getElementById("weeklyProfit");
+const monthlyProfit = document.getElementById("monthlyProfit");
+const annualProfit = document.getElementById("annualProfit");
+const payback = document.getElementById("payback");
+
+const potentialPercent = document.getElementById("potentialPercent");
+const progressFill = document.getElementById("progressFill");
+const potentialText = document.getElementById("potentialText");
+
+const businessCards = document.querySelectorAll(".business-card");
+
+
+/* =========================================================
+   INPUT HELPERS
+========================================================= */
+
+function value(id) {
+
+    const input = inputs[id];
+
+    if (!input) {
+        return 0;
+    }
+
+    const number = parseFloat(input.value);
+
+    return Number.isFinite(number) ? number : 0;
+}
+
+
+function money(number) {
+
+    if (!Number.isFinite(number)) {
+        number = 0;
+    }
+
+    return number.toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+        maximumFractionDigits: 0
+    });
+}
+
+
+function hasRequiredInputs() {
+
+    return (
+        value("daysPerWeek") > 0 &&
+        value("salesPerDay") >= 0 &&
+        value("pricePerSale") > 0 &&
+        value("costPerSale") >= 0
+    );
+}
+
+
+/* =========================================================
+   CALCULATOR INPUT LISTENERS
+========================================================= */
 
 ids.forEach(id => {
 
-    inputs[id] = document.getElementById(id);
+    const input = inputs[id];
 
-    if (inputs[id]) {
-
-        inputs[id].addEventListener("input", calculate);
-
+    if (!input) {
+        return;
     }
+
+    input.addEventListener("input", calculate);
+    input.addEventListener("change", calculate);
 
 });
 
 
-// ==============================
-// OUTPUT ELEMENTS
-// ==============================
+/* =========================================================
+   BUSINESS TYPE BUTTONS
+========================================================= */
 
-const startupTotal =
-    document.getElementById("startupTotal");
+businessCards.forEach(card => {
 
-const dailyProfit =
-    document.getElementById("dailyProfit");
+    card.addEventListener("click", () => {
 
-const weeklyProfit =
-    document.getElementById("weeklyProfit");
+        businessCards.forEach(item => {
+            item.classList.remove("active");
+        });
 
-const monthlyProfit =
-    document.getElementById("monthlyProfit");
-
-const annualProfit =
-    document.getElementById("annualProfit");
-
-const payback =
-    document.getElementById("payback");
-
-const potentialPercent =
-    document.getElementById("potentialPercent");
-
-const progressFill =
-    document.getElementById("progressFill");
-
-const potentialText =
-    document.getElementById("potentialText");
-
-const businessButtons =
-    document.querySelectorAll(".business-card");
-
-
-// ==============================
-// BUSINESS TYPE
-// ==============================
-
-console.log("Found buttons:", businessButtons.length);
-
-let selectedBusiness = "other";
-
-
-// ==============================
-// GET INPUT VALUE
-// ==============================
-
-function value(id) {
-
-    if (!inputs[id]) {
-        return 0;
-    }
-
-    return Number(inputs[id].value) || 0;
-
-}
-
-
-// ==============================
-// CHECK REQUIRED INPUTS
-// ==============================
-
-function hasRequiredInputs() {
-
-    const required = [
-        "daysPerWeek",
-        "salesPerDay",
-        "pricePerSale",
-        "costPerSale"
-    ];
-
-    return required.every(id => {
-
-        return (
-            inputs[id] &&
-            inputs[id].value.trim() !== ""
-        );
+        card.classList.add("active");
 
     });
 
-}
+});
 
 
-// ==============================
-// FORMAT MONEY
-// ==============================
-
-function money(amount) {
-
-    return "$" + amount.toLocaleString(undefined, {
-
-        maximumFractionDigits: 0
-
-    });
-
-}
-
-
-// ==============================
-// CALCULATE
-// ==============================
+/* =========================================================
+   CALCULATOR
+========================================================= */
 
 function calculate() {
-
-
-    // ==========================
-    // STARTUP COSTS
-    // ==========================
 
     const startup =
         value("equipment") +
@@ -164,27 +132,23 @@ function calculate() {
         value("inventory") +
         value("misc");
 
-
-    // ==========================
-    // REVENUE / COST PER SALE
-    // ==========================
-
-    const sales =
-        value("salesPerDay");
-
-    const price =
-        value("pricePerSale");
-
-    const cost =
-        value("costPerSale");
-
-    const daysPerWeek =
-        value("daysPerWeek");
+    const sales = value("salesPerDay");
+    const price = value("pricePerSale");
+    const cost = value("costPerSale");
+    const daysPerWeek = value("daysPerWeek");
 
 
-    const profitPerSale =
-        price - cost;
+    /*
+        COGS
 
+        Average COGS per sale already includes:
+        - Ingredients
+        - Products
+        - Packaging
+        - Other direct sale costs
+    */
+
+    const profitPerSale = price - cost;
 
     const profitMargin =
         price > 0
@@ -192,38 +156,32 @@ function calculate() {
             : 0;
 
 
-    // ==========================
-    // GROSS PROFIT
-    // ==========================
+    /*
+        REVENUE
+    */
 
     const grossDaily =
         sales * profitPerSale;
 
-
     const grossWeekly =
         grossDaily * daysPerWeek;
-
 
     const grossAnnual =
         grossWeekly * 52;
 
 
-    // ==========================
-    // WEEKLY RECURRING COSTS
-    // ==========================
+    /*
+        OPERATING COSTS
 
-    const weeklyRecurring =
-        value("weeklyInventory") +
-        value("weeklyPackaging") +
+        These are costs that are NOT already included
+        in COGS.
+    */
+
+    const weeklyOperatingCosts =
         value("weeklyFuel") +
         value("weeklyOther");
 
-
-    // ==========================
-    // MONTHLY RECURRING COSTS
-    // ==========================
-
-    const monthlyRecurring =
+    const monthlyOperatingCosts =
         value("monthlyInsurance") +
         value("monthlyPhone") +
         value("monthlyStorage") +
@@ -231,32 +189,20 @@ function calculate() {
         value("monthlyOther");
 
 
-    // ==========================
-    // CONVERT MONTHLY COSTS
-    // TO ANNUAL COST
-    // ==========================
-
-    const annualRecurringMonthlyCosts =
-        monthlyRecurring * 12;
-
-
-    // ==========================
-    // NET OPERATING PROFIT
-    // ==========================
+    /*
+        NET PROFIT
+    */
 
     const annualNetProfit =
         grossAnnual -
-        (weeklyRecurring * 52) -
-        annualRecurringMonthlyCosts;
-
+        (weeklyOperatingCosts * 52) -
+        (monthlyOperatingCosts * 12);
 
     const monthlyNetProfit =
         annualNetProfit / 12;
 
-
     const weeklyNetProfit =
         annualNetProfit / 52;
-
 
     const dailyNetProfit =
         daysPerWeek > 0
@@ -264,41 +210,12 @@ function calculate() {
             : 0;
 
 
-    // ==========================
-    // STARTUP INVESTMENT
-    // ==========================
+    /*
+        DISPLAY RESULTS
+    */
 
     startupTotal.textContent =
         money(startup);
-
-
-    // ==========================
-    // INCOMPLETE CALCULATOR
-    // ==========================
-
-    if (!hasRequiredInputs()) {
-
-        dailyProfit.textContent = "--";
-        weeklyProfit.textContent = "--";
-        monthlyProfit.textContent = "--";
-        annualProfit.textContent = "--";
-        payback.textContent = "--";
-
-        potentialPercent.textContent = "--";
-
-        progressFill.style.width = "0%";
-
-        potentialText.textContent =
-            "Enter your numbers to calculate your Launch Score™";
-
-        return;
-
-    }
-
-
-    // ==========================
-    // DISPLAY PROFITS
-    // ==========================
 
     dailyProfit.textContent =
         money(dailyNetProfit);
@@ -313,16 +230,13 @@ function calculate() {
         money(annualNetProfit);
 
 
-    // ==========================
-    // PAYBACK PERIOD
-    // ==========================
+    /*
+        PAYBACK PERIOD
 
-    if (startup === 0 && dailyNetProfit > 0) {
+        Measured in actual operating days.
+    */
 
-        payback.textContent =
-            "Already Recovered";
-
-    } else if (startup > 0 && dailyNetProfit > 0) {
+    if (dailyNetProfit > 0) {
 
         const days =
             Math.ceil(startup / dailyNetProfit);
@@ -338,9 +252,9 @@ function calculate() {
     }
 
 
-    // ==========================
-    // LAUNCH SCORE
-    // ==========================
+    /*
+        LAUNCH SCORE
+    */
 
     updatePotential(
         startup,
@@ -353,240 +267,86 @@ function calculate() {
 }
 
 
-// ==============================
-// YOVIK LAUNCH SCORE
-// ==============================
+/* =========================================================
+   LAUNCH SCORE
+========================================================= */
 
 function updatePotential(
     startup,
-    dailyProfit,
+    dailyProfitValue,
     yearlyProfit,
     profitMargin,
     daysPerWeek
 ) {
 
+    /*
+        Determine the type of business model
+        based on operating frequency.
+
+        1–2 days = Side Hustle
+        3–4 days = Growth Business
+        5–7 days = Full-Time
+    */
+
+    let businessModel;
+
+    if (daysPerWeek <= 2) {
+
+        businessModel = "side";
+
+    } else if (daysPerWeek <= 4) {
+
+        businessModel = "growth";
+
+    } else {
+
+        businessModel = "fulltime";
+
+    }
+
+
     let score = 0;
 
 
     /*
-        YOVIK automatically determines
-        the scoring model from the number
-        of operating days entered.
+        PAYBACK
 
-        1–2 days  = Side Hustle
-        3–4 days  = Growth Business
-        5–7 days  = Full-Time Business
+        Startup recovery supports the score
+        but does not dominate it.
     */
 
+    let paybackScore = 0;
 
-    // ==============================
-    // SIDE HUSTLE — 1–2 DAYS
-    // ==============================
+    if (startup === 0 && dailyProfitValue > 0) {
 
-    if (daysPerWeek <= 2) {
+        paybackScore = 20;
 
+    } else if (startup > 0 && dailyProfitValue > 0) {
 
-        // Annual Profit — 30 points
-
-        const profitScore =
-            yearlyProfit > 0
-                ? Math.min(
-                    30,
-                    yearlyProfit / 900
-                )
-                : 0;
+        const paybackDays =
+            startup / dailyProfitValue;
 
 
-        // Profit Per Operating Day — 35 points
-
-        const dailyEfficiencyScore =
-            Math.min(
-                35,
-                Math.max(0, dailyProfit) / 8
-            );
-
-
-        // Startup Payback — 20 points
-
-        let paybackScore = 0;
-
-
-        if (startup === 0 && dailyProfit > 0) {
-
-            paybackScore = 20;
-
-        } else if (startup > 0 && dailyProfit > 0) {
-
-            const paybackDays =
-                startup / dailyProfit;
-
+        if (businessModel === "side") {
 
             if (paybackDays <= 30) {
-
                 paybackScore = 20;
-
             } else if (paybackDays <= 90) {
-
                 paybackScore = 17;
-
             } else if (paybackDays <= 180) {
-
                 paybackScore = 13;
-
             } else if (paybackDays <= 365) {
-
                 paybackScore = 8;
-
             } else if (paybackDays <= 730) {
-
                 paybackScore = 4;
-
             }
 
-        }
-
-
-        // Profit Margin — 15 points
-
-        const marginScore =
-            Math.min(
-                15,
-                Math.max(0, profitMargin) * 30
-            );
-
-
-        score =
-            profitScore +
-            dailyEfficiencyScore +
-            paybackScore +
-            marginScore;
-
-    }
-
-
-    // ==============================
-    // GROWTH BUSINESS — 3–4 DAYS
-    // ==============================
-
-    else if (daysPerWeek <= 4) {
-
-
-        // Annual Profit — 40 points
-
-        const profitScore =
-            yearlyProfit > 0
-                ? Math.min(
-                    40,
-                    yearlyProfit / 2500
-                )
-                : 0;
-
-
-        // Profit Per Operating Day — 20 points
-
-        const dailyEfficiencyScore =
-            Math.min(
-                20,
-                Math.max(0, dailyProfit) / 10
-            );
-
-
-        // Startup Payback — 20 points
-
-        let paybackScore = 0;
-
-
-        if (startup === 0 && dailyProfit > 0) {
-
-            paybackScore = 20;
-
-        } else if (startup > 0 && dailyProfit > 0) {
-
-            const paybackDays =
-                startup / dailyProfit;
-
-
-            if (paybackDays <= 30) {
-
-                paybackScore = 20;
-
-            } else if (paybackDays <= 90) {
-
-                paybackScore = 17;
-
-            } else if (paybackDays <= 180) {
-
-                paybackScore = 13;
-
-            } else if (paybackDays <= 365) {
-
-                paybackScore = 8;
-
-            } else if (paybackDays <= 730) {
-
-                paybackScore = 4;
-
-            }
-
-        }
-
-
-        // Profit Margin — 20 points
-
-        const marginScore =
-            Math.min(
-                20,
-                Math.max(0, profitMargin) * 40
-            );
-
-
-        score =
-            profitScore +
-            dailyEfficiencyScore +
-            paybackScore +
-            marginScore;
-
-    }
-
-
-    // ==============================
-    // FULL-TIME BUSINESS — 5–7 DAYS
-    // ==============================
-
-    else {
-
-
-        // Annual Profit — 50 points
-
-        const profitScore =
-            yearlyProfit > 0
-                ? Math.min(
-                    50,
-                    yearlyProfit / 1750
-                )
-                : 0;
-
-
-        // Startup Payback — 25 points
-
-        let paybackScore = 0;
-
-
-        if (startup === 0 && dailyProfit > 0) {
-
-            paybackScore = 25;
-
-        } else if (startup > 0 && dailyProfit > 0) {
-
-            const paybackDays =
-                startup / dailyProfit;
-
+        } else {
 
             if (paybackDays <= 90) {
 
                 paybackScore =
-                    25 -
-                    (paybackDays / 90 * 5);
+                    25 - (paybackDays / 90 * 5);
 
             } else if (paybackDays <= 180) {
 
@@ -606,23 +366,98 @@ function updatePotential(
                     7.5 -
                     ((paybackDays - 365) / 365 * 7.5);
 
-            } else {
-
-                paybackScore = 0;
-
             }
 
         }
 
+    }
 
-        // Profit Margin — 25 points
+
+    /*
+        SIDE HUSTLE
+    */
+
+    if (businessModel === "side") {
+
+        /*
+            Profit is important, but a side hustle
+            does not need to produce full-time income.
+        */
+
+        const profitScore =
+            yearlyProfit > 0
+                ? Math.min(30, yearlyProfit / 900)
+                : 0;
+
+        const dailyEfficiencyScore =
+            Math.min(
+                35,
+                Math.max(0, dailyProfitValue) / 8
+            );
+
+        const marginScore =
+            Math.min(
+                15,
+                Math.max(0, profitMargin) * 30
+            );
+
+        score =
+            profitScore +
+            dailyEfficiencyScore +
+            paybackScore +
+            marginScore;
+
+    }
+
+
+    /*
+        GROWTH BUSINESS
+    */
+
+    else if (businessModel === "growth") {
+
+        const profitScore =
+            yearlyProfit > 0
+                ? Math.min(40, yearlyProfit / 2500)
+                : 0;
+
+        const dailyEfficiencyScore =
+            Math.min(
+                20,
+                Math.max(0, dailyProfitValue) / 10
+            );
+
+        const marginScore =
+            Math.min(
+                20,
+                Math.max(0, profitMargin) * 40
+            );
+
+        score =
+            profitScore +
+            dailyEfficiencyScore +
+            paybackScore +
+            marginScore;
+
+    }
+
+
+    /*
+        FULL-TIME BUSINESS
+    */
+
+    else {
+
+        const profitScore =
+            yearlyProfit > 0
+                ? Math.min(50, yearlyProfit / 1750)
+                : 0;
 
         const marginScore =
             Math.min(
                 25,
                 Math.max(0, profitMargin) * 50
             );
-
 
         score =
             profitScore +
@@ -632,9 +467,9 @@ function updatePotential(
     }
 
 
-    // ==============================
-    // FINAL SCORE
-    // ==============================
+    /*
+        Keep score between 0 and 100.
+    */
 
     score =
         Math.max(
@@ -643,154 +478,136 @@ function updatePotential(
         );
 
 
-    const displayScore =
-        Math.round(score);
+    score = Math.round(score);
 
 
-    // ==============================
-    // DISPLAY SCORE
-    // ==============================
+    /*
+        UPDATE SCORE DISPLAY
+    */
 
     potentialPercent.textContent =
-        displayScore + "%";
-
+        score + "%";
 
     progressFill.style.width =
-        displayScore + "%";
+        score + "%";
 
 
-    // ==============================
-    // SCORE MESSAGE
-    // ==============================
+    /*
+        SCORE MESSAGE
+    */
 
-    let result = "";
+    let message;
 
 
-    if (displayScore >= 90) {
+    if (score >= 90) {
 
-        result =
-            "🏆 Exceptional Opportunity — Your numbers show very strong business fundamentals.";
+        message =
+            "🔥 Exceptional Opportunity — Your numbers show a very strong business model with excellent profit potential.";
 
-    } else if (displayScore >= 80) {
+    } else if (score >= 80) {
 
-        result =
-            "🚀 Strong Opportunity — Your business has a solid financial foundation.";
+        message =
+            "🚀 Strong Opportunity — Your numbers show a strong business model with solid profit potential.";
 
-    } else if (displayScore >= 70) {
+    } else if (score >= 70) {
 
-        result =
-            "✅ Viable Opportunity — Your numbers show a reasonably sound business model.";
+        message =
+            "✅ Viable Opportunity — Your numbers show a reasonably sound business model. Your profit, margins, and startup payback are working together well.";
 
-    } else if (displayScore >= 60) {
+    } else if (score >= 60) {
 
-        result =
-            "📈 Needs Improvement — Your business may work, but some numbers should be strengthened.";
+        message =
+            "⚠️ Needs Improvement — Your business may be workable, but improving profitability or reducing costs could make a meaningful difference.";
 
-    } else if (displayScore >= 40) {
+    } else if (score >= 40) {
 
-        result =
-            "⚠️ High Risk — Your current numbers have some significant weaknesses.";
+        message =
+            "⚠️ High Risk — Your current numbers have some significant weaknesses. Improving sales volume, margins, or operating costs could change the outlook.";
 
     } else {
 
-        result =
-            "🛑 Poor Outlook — Your current numbers suggest the business model needs significant improvement.";
+        message =
+            "❌ Poor Outlook — Your current numbers suggest the business may struggle to generate enough profit to justify the investment.";
 
     }
 
 
-    // ==============================
-    // SCORE EXPLANATION
-    // ==============================
+    /*
+        ADD SPECIFIC GUIDANCE
+    */
 
-    let explanation = "";
+    const guidance = [];
 
 
     if (yearlyProfit <= 0) {
 
-        explanation =
-            "Your projected net profit is currently too low to support a strong score.";
-
-    } else if (dailyProfit < 50) {
-
-        explanation =
-            "Your biggest opportunity is increasing the profit earned on each operating day.";
-
-    } else if (profitMargin < 0.20) {
-
-        explanation =
-            "Your profit margin is limiting the score. Improving pricing or lowering cost per sale would help.";
-
-    } else if (startup > 0 && dailyProfit > 0) {
-
-        const paybackDays =
-            startup / dailyProfit;
-
-
-        if (paybackDays > 365) {
-
-            explanation =
-                "Your biggest weakness is the time required to recover your startup investment.";
-
-        } else if (yearlyProfit < 25000) {
-
-            explanation =
-                "Your margins and payback are reasonable, but increasing sales volume would have the biggest impact.";
-
-        } else {
-
-            explanation =
-                "Your profit, margins, and startup payback are working together well.";
-
-        }
-
-    } else {
-
-        explanation =
-            "Your current numbers provide a useful starting point. Increasing sales or improving margins can strengthen the result.";
+        guidance.push(
+            "Your projected annual net profit is too low."
+        );
 
     }
 
 
-    potentialText.textContent =
-        `${result} ${explanation}`;
+    if (dailyProfitValue < 50) {
+
+        guidance.push(
+            "Increasing the profit earned per operating day would strengthen the model."
+        );
+
+    }
+
+
+    if (profitMargin < 0.20) {
+
+        guidance.push(
+            "Your profit margin is low. Consider improving pricing or reducing COGS."
+        );
+
+    }
+
+
+    if (
+        startup > 0 &&
+        dailyProfitValue > 0 &&
+        startup / dailyProfitValue > 365
+    ) {
+
+        guidance.push(
+            "Your startup investment takes more than a year of operating days to recover."
+        );
+
+    }
+
+
+    if (yearlyProfit > 0 && yearlyProfit < 25000) {
+
+        guidance.push(
+            "Increasing sales volume would have the biggest impact on your projected profit."
+        );
+
+    }
+
+
+    if (guidance.length === 0) {
+
+        guidance.push(
+            "Your core financial fundamentals are working well together."
+        );
+
+    }
+
+
+    potentialText.innerHTML =
+        message +
+        "<br><br>" +
+        guidance.join(" ");
+
 
 }
 
 
-// ==============================
-// BUSINESS BUTTONS
-// ==============================
-
-businessButtons.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-
-        businessButtons.forEach(btn =>
-            btn.classList.remove("active")
-        );
-
-
-        button.classList.add("active");
-
-
-        selectedBusiness =
-            button.dataset.business;
-
-
-        console.log(
-            "Selected:",
-            selectedBusiness
-        );
-
-    });
-
-});
-
-
-// ==============================
-// INITIAL CALCULATION
-// ==============================
+/* =========================================================
+   INITIAL CALCULATION
+========================================================= */
 
 calculate();
