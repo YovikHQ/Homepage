@@ -1195,6 +1195,16 @@ body {
         #19ff7a
     );
     box-sizing: border-box;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.premium-tool-cta:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 0 18px rgba(25, 255, 122, 0.18),
+        0 0 35px rgba(255, 179, 0, 0.10);
 }
 
 .premium-tool-content {
@@ -1206,7 +1216,7 @@ body {
 }
 
 
-/* YOVIK+ STYLE BADGE */
+/* YOVIK+ BADGE */
 
 .premium-tool-badge {
     display: inline-block;
@@ -1247,7 +1257,7 @@ body {
 }
 
 
-/* YOVIK+ STYLE BUTTON */
+/* YOVIK+ BUTTON */
 
 .premium-tool-button {
     display: block;
@@ -1264,12 +1274,14 @@ body {
     text-decoration: none;
     transition:
         background 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .premium-tool-button:hover {
     background: #383838;
     transform: translateY(-1px);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.08);
 }
 
 
@@ -1310,4 +1322,5 @@ body {
     }
 
 }
+
 
