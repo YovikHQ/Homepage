@@ -392,7 +392,7 @@ function updatePotential(
             yearlyProfit > 0
                 ? Math.min(
                     30,
-                    yearlyProfit / 2500
+                    yearlyProfit / 900
                 )
                 : 0;
 
