@@ -148,7 +148,7 @@ main{
 
 .snapshot{
     position:sticky;
-    top: 0;
+    top: .0;
 }
 
 .snapshot-card{
