@@ -136,3 +136,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 });
+
+// ==========================
+// TOOL LIBRARY EMAIL SIGNUP
+// ==========================
+
+const toolEmailForm = document.querySelector('.email-signup-form');
+const toolEmailSuccess = document.getElementById('toolEmailSuccess');
+
+if (toolEmailForm && toolEmailSuccess) {
+    toolEmailForm.addEventListener('submit', function () {
+
+        setTimeout(function () {
+            toolEmailForm.style.display = 'none';
+            toolEmailSuccess.style.display = 'block';
+        }, 1000);
+
+    });
+}
+

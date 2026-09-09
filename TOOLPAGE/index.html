@@ -247,6 +247,7 @@
     </div>
 
 </section>
+
 <section class="tool-cta">
 
     <h2>More Tools Are On The Way</h2>
@@ -257,11 +258,18 @@
         entrepreneurs launch and grow successful businesses.
     </p>
 
-    <form class="email-signup-form">
+    <form
+        class="email-signup-form"
+        method="POST"
+        action="https://73874b7b.sibforms.com/serve/MUIFABb8AJ9y0fCDE2PGF1JANMEoKw-4x5z1_DhkWd0kYyTElTYj0FPZSfDg3tNjRZdnzR9WVkF1JDVOzggB8ZH6NCMhKfwSMYz8eQi4Y9cgEEnysxymMoPA3gKBbCdf7IxL_hfQXS_cO58t4Xhv0Yn2jV5b5S0heiIj-Dexic_4dkdo1rkhKp1gSKuPJJookhsTz5n7UCduX5FmOg=="
+        target="toolEmailSubmissionFrame"
+    >
 
         <input
             type="email"
+            name="EMAIL"
             placeholder="Enter your email"
+            autocomplete="email"
             required
         >
 
@@ -269,9 +277,31 @@
             Notify Me
         </button>
 
+        <input
+            type="text"
+            name="email_address_check"
+            value=""
+            style="display:none;"
+        >
+
+        <input
+            type="hidden"
+            name="locale"
+            value="en"
+        >
+
     </form>
 
+    <div id="toolEmailSuccess" style="display: none;">
+        You're on the list. We'll let you know when new tools launch.
+    </div>
+
 </section>
+
+<iframe
+    name="toolEmailSubmissionFrame"
+    style="display:none;"
+></iframe>
 
 </main>
 
