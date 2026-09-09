@@ -653,3 +653,21 @@ function updatePotential(
 ========================================================= */
 
 calculate();
+
+// ==========================
+// LAUNCH EMAIL SIGNUP
+// ==========================
+
+const launchEmailForm = document.querySelector('.email-signup form');
+const launchEmailSuccess = document.getElementById('launchEmailSuccess');
+
+if (launchEmailForm && launchEmailSuccess) {
+    launchEmailForm.addEventListener('submit', function () {
+
+        setTimeout(function () {
+            launchEmailForm.style.display = 'none';
+            launchEmailSuccess.style.display = 'block';
+        }, 1000);
+
+    });
+}
